@@ -1,0 +1,107 @@
+body {
+	background: #ffffff;
+	padding: 0;
+	border: 0;
+	margin: 0;
+	width: 100%;
+	height: 100%;
+}
+
+html {
+	-ms-touch-action: none;
+}
+
+div {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+	font-weight: inherit;
+	font-style: inherit;
+	font-size: 100%;
+	font-family: inherit;
+	vertical-align: baseline;
+	webkitTouchCallout: none;
+	touchCallout: none;
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+	tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+a {
+	text-decoration: none;
+}
+
+p {
+	margin: 0;
+	padding-right: 45px;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+}
+
+.gl_list {
+	position: relative;
+	left: 0px;
+	top: 0px;
+	padding: 5px;
+	background-color: #ede8df;
+}
+
+.gl_list_one {
+	position: relative;
+	display: inline-block;
+	width: 100%;
+	height: 85px;
+	box-shadow: 4px 4px 2px #d6d6d6;
+	border-bottom: 1px solid #cccccc;
+	display: inline-block;
+	background-color: #ede8df;
+	border-radius: 10px;
+	margin-top: 2.5px;
+	margin-bottom: 2.5px;
+}
+
+.gl_img {
+	position: absolute;
+	left: 10px;
+	top: 10px;
+	height: 65px;
+	width: 65px;
+	-webkit-box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.4);
+	-webkit-border-radius: 10px;
+}
+
+.gl_list_one_center {
+	height: 85px;
+	margin-left: 85px;
+	margin-top: 10px;
+	color: #000;
+	line-height: 140%;
+}
+
+.gl_list_one_right {
+	position: absolute;
+	right: 10px;
+	top: 50%;
+	margin-top: -18px;
+}
+
+.fl_button_grey {
+	background: #ff9900;
+	color: #fff;
+	font-weight: bold;
+	border-color: #cc6600;
+	text-shadow: 0 1px 0px rgb(0, 0, 0,);
+	box-shadow: 2px 1px 5px rgba(255, 255, 255, .7);
+}
+
+.fl_button {
+	width: 50px;
+	height: 28px;
+	line-height: 28px;
+	border: 2px solid #cc6600;
+	border-radius: 10px;
+	padding: 0 5px;
+	display: inline-block;
+	text-align: center;
+}

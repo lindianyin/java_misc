@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nfl.kfb.maintenance.mapper.MaintenanceMapper">
+
+	<resultMap id="MailResult" type="Mail">
+		<id property="mailKey" 			column="MAIL_KEY" 		javaType="int" />
+		<id property="owner" 			column="OWNER" 			javaType="string" />
+		<id property="sender" 			column="SENDER" 		javaType="string" />
+		<id property="item" 			column="ITEM" 			javaType="int" />
+		<id property="cnt" 				column="CNT" 			javaType="int" />
+		<id property="delDt" 			column="DEL_DT" 		javaType="int" />
+		<id property="msg" 				column="MSG" 			javaType="string" />
+	</resultMap>
+
+	<select id="selectCheatingAppId" resultType="string">
+	<![CDATA[
+		SELECT
+			DISTINCT APPID
+		FROM
+			GAME_LOG
+		WHERE
+			MONTH=201310
+			AND LOG_TYPE=10
+			AND (ADD_GOLD>10000 or ADD_BALL>100)
+			AND EPOCH > 1381813200
+	]]>
+	</select>
+	
+	<update id="updateCheatingAppIdGoldBall" parameterType="map">
+		UPDATE
+			ACCOUNT
+		SET
+			GOLD = 0 - ABS(GOLD)
+			, BALL = 0 - ABS(BALL)
+		WHERE
+			APPID = #{appId}
+	</update>
+	
+	<insert id="insertMail" parameterType="Mail">
+		<selectKey keyProperty="mailKey" resultType="int" order="AFTER">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+		INSERT INTO
+			MAIL (
+				OWNER
+				, SENDER
+				, ITEM
+				, CNT
+				, DEL_DT
+				, MSG
+		)
+		VALUES (
+			#{owner}
+			, #{sender}
+			, #{item}
+			, #{cnt}
+			, #{delDt}
+			, #{msg}
+		)
+	</insert>
+	
+	<insert id="insertGameLog" parameterType="GameLog" >
+		INSERT INTO
+			GAME_LOG (
+				MONTH
+				, EPOCH
+				, APPID
+				, LOG_TYPE
+				, CURRENCY
+				, ITEM_ID
+				, ITEM_CNT
+				, ADD_GOLD
+				, NOW_GOLD
+				, ADD_BALL
+				, NOW_BALL
+				, ADD_PUNCH
+				, NOW_PUNCH
+				, RESERV0
+				, RESERV1
+		) 
+		VALUES (
+	  		#{month}
+	  		, #{epoch}
+	  		, #{appId}
+	  		, #{logType}
+	  		, #{currency}
+	  		, #{itemId}
+	  		, #{itemCnt}
+	  		, #{addGold}
+	  		, #{nowGold}
+	  		, #{addBall}
+	  		, #{nowBall}
+	  		, #{addPunch}
+	  		, #{nowPunch}
+	  		, #{reserved0}
+	  		, #{reserved1}
+  		)
+	</insert>
+	
+	<select id="selectAllAppId" resultType="string">
+	<![CDATA[
+		SELECT
+			APPID
+		FROM
+			ACCOUNT
+	]]>
+	</select>
+	
+	
+</mapper>

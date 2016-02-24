@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+	
+	<!-- Root Context: defines shared resources visible to all other web components -->
+	<bean id="applicationProperties"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location" value="classpath:db.properties" />
+	</bean>
+	
+	<bean id="dataSource"
+		class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url" value="${mysql.url}" />
+		<property name="username" value="${mysql.username}" />
+		<property name="password" value="${mysql.password}" />
+		<!-- 
+		<property name="defaultAutoCommit" value="false" />
+		-->
+		<property name="initialSize" value="20"/>							<!-- 최초 초기화 커넥션 수  -->
+		<property name="maxActive" value="50"/>								<!-- 최대 커넥션 수(Maximum Active Connections) -->
+		<property name="maxIdle" value="10"/>								<!-- 사용되지 않고 풀에 저장될 수 있는 최대 커넥션 개수. 음수일 경우 제한이 없음. -->
+		<property name="maxWait" value="5000" />							<!-- 최대 대기시간(milliseconds). 음수일 경우 제한이 없음 -->
+		
+		<property name="testOnBorrow" value="true"/>						<!-- true일 경우 커넥션을 가져올 때 커넥션이 유효한지의 여부를 검사. -->
+		<property name="testOnReturn" value="false"/>						<!-- true일 경우 커넥션을 반환할 때 커넥션이 유효한지의 여부를 검사. -->
+		<property name="testWhileIdle" value="true"/>						<!-- true일 경우 유효하지 않은 커넥션은 풀에서 제거 -->
+		<property name="timeBetweenEvictionRunsMillis" value="300000"/>		<!-- 사용되지 않은 커넥션을 추출하는 쓰레드의 실행주기를 지정. ( 음수이면 동작하지 않음, milliseconds) -->
+		<property name="numTestsPerEvictionRun" value="20"/>				<!-- 사용되지 않은 커넥션을 검증할 connection수 지정 -->
+		
+		<property name="minEvictableIdleTimeMillis" value="600000"/>		<!-- pool에 대기중인 시간이 설정된 값보다 크다면 validationQuery 와 관계없이 풀에서 제거 -->
+		<property name="validationQuery" value="SELECT 1"/>					<!-- Validation Query -->
+		<property name="poolPreparedStatements" value="true"/>
+		
+		<property name="logAbandoned" value="true"/>
+		<property name="removeAbandoned" value="true"/>						<!-- 사용하지 않는 connection에 대한 반환여부 -->
+		<property name="removeAbandonedTimeout" value="600"/>						 
+	</bean>
+	
+	
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="defaultEncoding" value="utf-8" />
+		<property name="maxUploadSize" value="10485760000" />
+		<property name="maxInMemorySize" value="40960" />
+	</bean>
+	
+	
+	
+	
+</beans>

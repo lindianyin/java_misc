@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nfl.kfb.mapper.logging.LoggingMapper">
+
+
+	<resultMap id="GameLogResult" type="GameLog">
+		<id property="logKey" 	column="LOG_KEY" 	javaType="int" />
+		<id property="month" 	column="MONTH" 		javaType="int" />
+		<id property="epoch" 	column="EPOCH" 		javaType="int" />
+		<id property="appId" 	column="APPID" 		javaType="String" />
+		<id property="logType" 	column="LOG_TYPE" 	javaType="int" />
+		<id property="currency" column="CURRENCY" 	javaType="float" />
+		<id property="itemId" 	column="EPOCH" 		javaType="int" />
+		<id property="itemCnt" 	column="EPOCH" 		javaType="int" />
+		<id property="addGold" 	column="ADD_GOLD" 	javaType="int" />
+		<id property="nowGold" 	column="NOW_GOLD" 	javaType="int" />
+		<id property="addBall" 	column="ADD_BALL" 	javaType="int" />
+		<id property="nowBall" 	column="NOW_BALL" 	javaType="int" />
+		<id property="addPunch" column="ADD_PUNCH" 	javaType="int" />
+		<id property="nowPunch" column="NOW_PUNCH" 	javaType="int" />
+		<id property="reserved0" column="RESERV0" 	javaType="long" />
+		<id property="reserved1" column="RESERV1" 	javaType="long" />
+	</resultMap>
+
+
+
+
+	<insert id="insertGameLog" parameterType="GameLog">
+		INSERT INTO
+		game_log (
+		MONTH
+		, EPOCH
+		, APPID
+		, LOG_TYPE
+		, CURRENCY
+		, ITEM_ID
+		, ITEM_CNT
+		, ADD_GOLD
+		, NOW_GOLD
+		, ADD_BALL
+		, NOW_BALL
+		, ADD_PUNCH
+		, NOW_PUNCH
+		, RESERV0
+		, RESERV1
+		)
+		VALUES (
+		#{month}
+		, #{epoch}
+		, #{appId}
+		, #{logType}
+		, #{currency}
+		, #{itemId}
+		, #{itemCnt}
+		, #{addGold}
+		, #{nowGold}
+		, #{addBall}
+		, #{nowBall}
+		, #{addPunch}
+		, #{nowPunch}
+		, #{reserved0}
+		, #{reserved1}
+		)
+	</insert>
+
+	<insert id="insertGameLogs" parameterType="GameLog">
+		INSERT INTO
+		game_log (
+		MONTH
+		, EPOCH
+		, APPID
+		, LOG_TYPE
+		, CURRENCY
+		, ITEM_ID
+		, ITEM_CNT
+		, ADD_GOLD
+		, NOW_GOLD
+		, ADD_BALL
+		, NOW_BALL
+		, ADD_PUNCH
+		, NOW_PUNCH
+		, RESERV0
+		, RESERV1
+		)
+		VALUES
+		<foreach collection="list" index="index" item="item"
+			separator=",">
+			(
+			#{item.month}
+			, #{item.epoch}
+			, #{item.appId}
+			, #{item.logType}
+			, #{item.currency}
+			, #{item.itemId}
+			, #{item.itemCnt}
+			, #{item.addGold}
+			, #{item.nowGold}
+			, #{item.addBall}
+			, #{item.nowBall}
+			, #{item.addPunch}
+			, #{item.nowPunch}
+			, #{item.reserved0}
+			, #{item.reserved1}
+			)
+		</foreach>
+	</insert>
+
+	<insert id="insertCurrencyLog" parameterType="CurrencyLog"
+		useGeneratedKeys="true" keyProperty="logKey">
+		INSERT INTO
+		currency_log (
+		MONTH
+		, LOG_KEY
+		, EPOCH
+		, APPID
+		, STORE
+		, CURRENCY
+		, PROD_ID
+		, CURRENCY_TYPE
+		, CCODE
+		)
+		VALUES (
+		#{month}
+		, #{logKey}
+		, #{epoch}
+		, #{appId}
+		, #{store}
+		, #{currency}
+		, #{productId}
+		, #{currencyType}
+		, #{ccode}
+		)
+	</insert>
+
+	<insert id="insertCurrncyErrLog" parameterType="map">
+		INSERT INTO
+		currency_err_log (
+		APPID
+		, EPOCH
+		, ERR
+		)
+		VALUES (
+		#{appId}
+		, #{now}
+		, #{errMsg}
+		)
+	</insert>
+	<select id="selectGameLog" parameterType="map" resultType="GameLog" resultMap="GameLogResult">
+		SELECT
+		*
+		FROM
+		game_log
+		WHERE
+		APPID = #{appId}
+		AND LOG_TYPE = #{log_type}
+
+		ORDER BY EPOCH DESC LIMIT 1
+
+	</select>
+</mapper>

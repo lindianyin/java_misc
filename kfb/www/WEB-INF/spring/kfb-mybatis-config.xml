@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+ 
+<configuration>
+
+    <settings>
+        <setting name="cacheEnabled" value="true" />
+        <setting name="lazyLoadingEnabled" value="false" />
+        <setting name="multipleResultSetsEnabled" value="true" />
+        <setting name="useColumnLabel" value="true" />
+        <setting name="useGeneratedKeys" value="false" />
+        <!-- 
+        <setting name="defaultExecutorType" value="BATCH" />
+        -->
+        <setting name="defaultExecutorType" value="SIMPLE" /> 
+        <setting name="defaultStatementTimeout" value="25000" />
+    </settings>
+ 	
+	<typeAliases>
+		<typeAlias alias="Account" 			type="com.nfl.kfb.mapper.account.Account" />
+		<typeAlias alias="FriendAccount" 	type="com.nfl.kfb.mapper.account.FriendAccount" />
+		<typeAlias alias="WeekMission" 		type="com.nfl.kfb.mapper.week.WeekMission" />
+		<typeAlias alias="WeekAchieve" 		type="com.nfl.kfb.mapper.week.WeekAchieve" />
+		<typeAlias alias="Rank" 			type="com.nfl.kfb.mapper.rank.Rank" />
+		<typeAlias alias="GateRank" 		type="com.nfl.kfb.mapper.rank.GateRank" />
+		<typeAlias alias="Mail" 			type="com.nfl.kfb.mapper.mail.Mail" />
+		<typeAlias alias="Punch" 			type="com.nfl.kfb.mapper.mail.Punch" />
+		<typeAlias alias="Shop"				type="com.nfl.kfb.mapper.shop.Shop" />
+		<typeAlias alias="ShopCurrency"		type="com.nfl.kfb.mapper.shop.ShopCurrency" />
+		<typeAlias alias="Inven" 			type="com.nfl.kfb.mapper.inven.Inven" />
+		<typeAlias alias="Appver" 			type="com.nfl.kfb.mapper.appver.Appver" />
+		<typeAlias alias="GameLog" 			type="com.nfl.kfb.mapper.logging.GameLog" />
+		<typeAlias alias="CurrencyLog" 		type="com.nfl.kfb.mapper.logging.CurrencyLog" />
+		<typeAlias alias="Inv" 				type="com.nfl.kfb.mapper.inv.Inv" />
+		<typeAlias alias="InvList" 			type="com.nfl.kfb.mapper.inv.InvList" />
+		<typeAlias alias="AdminSubtract" 	type="com.nfl.kfb.mapper.admin.AdminSubtract" />
+		<typeAlias alias="Event" 			type="com.nfl.kfb.mapper.event.Event" />
+		<typeAlias alias="GambleProb" 		type="com.nfl.kfb.mapper.gamble.GambleProb" />
+		<typeAlias alias="Dungeon"	 		type="com.nfl.kfb.mapper.dungeon.Dungeon" />
+		<typeAlias alias="Anysdkpay"	 	type="com.nfl.kfb.mapper.shop.Anysdkpay" />
+		<typeAlias alias="Friendly"	 		type="com.nfl.kfb.mapper.inv.Friendly" />
+		<typeAlias alias="Grank"	 		type="com.nfl.kfb.mapper.rank.Grank" />
+		<typeAlias alias="BaseTask"	 		type="com.nfl.kfb.mapper.task.BaseTask" />
+		<typeAlias alias="RoleTask"	 		type="com.nfl.kfb.mapper.task.RoleTask" />
+		
+	</typeAliases>
+	
+    <!-- java.util.Date -->
+    <typeHandlers>
+        <typeHandler javaType="java.sql.Timestamp" handler="org.apache.ibatis.type.DateTypeHandler"/>
+        <typeHandler javaType="java.sql.Time" handler="org.apache.ibatis.type.DateTypeHandler"/>
+        <typeHandler javaType="java.sql.Date" handler="org.apache.ibatis.type.DateTypeHandler"/>
+    </typeHandlers>
+    
+	<mappers>
+		<mapper resource="com/nfl/kfb/mapper/account/Account-Mapper.xml"/>
+		<mapper resource="com/nfl/kfb/mapper/achieve/Achieve-Mapper.xml"/>
+		<mapper resource="com/nfl/kfb/mapper/inven/Inven-Mapper.xml"/>
+		<mapper resource="com/nfl/kfb/mapper/mail/Mail-Mapper.xml"/>
+		<mapper resource="com/nfl/kfb/mapper/rank/Rank-Mapper.xml"/>
+		<mapper resource="com/nfl/kfb/mapper/shop/Shop-Mapper.xml"/>
+		<mapper resource="com/nfl/kfb/mapper/week/Week-Mapper.xml"/>
+		<mapper resource="com/nfl/kfb/mapper/appver/Appver-Mapper.xml"/>
+		<mapper resource="com/nfl/kfb/mapper/logging/Logging-Mapper.xml"/>
+		<mapper resource="com/nfl/kfb/mapper/inv/Inv-Mapper.xml"/>
+		<mapper resource="com/nfl/kfb/mapper/admin/Admin-Mapper.xml"/>
+		<mapper resource="com/nfl/kfb/mapper/adpopcorn/AdPOPcorn-Mapper.xml"/>
+		<mapper resource="com/nfl/kfb/mapper/event/Event-Mapper.xml"/>
+		<mapper resource="com/nfl/kfb/mapper/gamble/Gamble-Mapper.xml"/>
+		<mapper resource="com/nfl/kfb/mapper/gameoption/GameOption-Mapper.xml"/>
+		<mapper resource="com/nfl/kfb/mapper/dungeon/Dungeon-Mapper.xml"/>
+		<mapper resource="com/nfl/kfb/mapper/shop/Anysdkpay-Mapper.xml"/>
+		<mapper resource="com/nfl/kfb/mapper/inv/Friendly-Mapper.xml"/>
+		<mapper resource="com/nfl/kfb/mapper/task/BaseTask-Mapper.xml"/>
+	</mappers>
+  
+</configuration>

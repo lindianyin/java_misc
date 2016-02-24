@@ -1,0 +1,11 @@
+2013-11-26 10:41:09,772 [INFO ] com.nfl.kfb.maintenance.ExportXls - exportAllAppId. output=[./doc/exportXls/2013-11-26 APPID.xlsx]
+2013-11-26 10:41:25,003 [INFO ] com.nfl.kfb.maintenance.ExportXls - appIdList.size=483749
+2013-11-26 10:46:17,076 [INFO ] com.nfl.kfb.maintenance.ExportFile - exportAllAppId. output=[./doc/exportXls/2013-11-26 APPID.xlsx]
+2013-11-26 10:46:20,740 [INFO ] com.nfl.kfb.maintenance.ExportFile - appIdList.size=10
+2013-11-26 10:46:20,956 [INFO ] com.nfl.kfb.maintenance.ExportFile - written to ./doc/exportXls/2013-11-26 APPID.xlsx
+2013-11-26 10:46:41,702 [INFO ] com.nfl.kfb.maintenance.ExportFile - exportAllAppId. output=[./doc/exportXls/2013-11-26 APPID.txt]
+2013-11-26 10:46:45,458 [INFO ] com.nfl.kfb.maintenance.ExportFile - appIdList.size=10
+2013-11-26 10:46:45,679 [INFO ] com.nfl.kfb.maintenance.ExportFile - written to ./doc/exportXls/2013-11-26 APPID.txt
+2013-11-26 10:47:06,663 [INFO ] com.nfl.kfb.maintenance.ExportFile - exportAllAppId. output=[./doc/exportXls/2013-11-26 APPID.txt]
+2013-11-26 10:47:21,331 [INFO ] com.nfl.kfb.maintenance.ExportFile - appIdList.size=483749
+2013-11-26 10:47:21,746 [INFO ] com.nfl.kfb.maintenance.ExportFile - written to ./doc/exportXls/2013-11-26 APPID.txt

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nfl.kfb.mapper.dungeon.DungeonMapper">
+
+	<resultMap id="DungeonResult" type="Dungeon">
+		<id property="appId" 			column="APPID" 				javaType="string" />
+		<id property="playDt" 			column="PLAY_DT" 			javaType="int" />
+		<id property="playLimit" 		column="PLAY_LIMIT" 		javaType="int" />
+		<id property="playCnt" 			column="PLAY_CNT" 			javaType="int" />
+		<id property="punch" 			column="PUNCH" 				javaType="int" />
+	</resultMap>
+	
+	<select id="selectDungeon" resultType="Dungeon" resultMap="DungeonResult">
+	<![CDATA[ 
+		SELECT
+			APPID
+			, PLAY_DT
+			, PLAY_LIMIT
+			, PLAY_CNT
+			, PUNCH
+		FROM
+			dungeon
+		WHERE
+			APPID = #{appId}
+	]]>
+	</select>
+	
+	<insert id="insertDungeon" parameterType="Dungeon">
+		INSERT INTO
+			dungeon (
+				APPID
+				, PLAY_DT
+				, PLAY_LIMIT
+				, PLAY_CNT
+				, PUNCH
+			)
+		VALUES (
+			#{appId}
+			, #{playDt}
+			, #{playLimit}
+			, #{playCnt}
+			, #{punch}
+		)
+	</insert>
+	
+	<update id="updateDungeon" parameterType="Dungeon">
+		UPDATE
+			dungeon
+		SET
+			PLAY_DT = #{playDt}
+			, PLAY_LIMIT = #{playLimit}
+			, PLAY_CNT = #{playCnt}
+			, PUNCH = #{punch}
+		WHERE
+			APPID = #{appId}
+	</update>
+
+</mapper>

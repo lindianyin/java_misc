@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nfl.kfb.push.mapper.PushMapper">
+
+	<resultMap id="PushDeviceResult" type="PushDevice">
+		<id property="appId" 			column="APPID" 		javaType="string" />
+		<id property="token" 			column="TOKEN" 		javaType="string" />
+		<id property="deviceType" 		column="LOGIN_TY" 	javaType="string" />
+	</resultMap>
+	
+	<resultMap id="PushSchedulerResult" type="PushScheduler">
+		<id property="pushSchedulerKey" 	column="PUSH_SCHEDULER_KEY" 	javaType="int" />
+		<id property="pushTitle" 			column="PUSH_TITLE" 			javaType="string" />
+		<id property="pushMsg" 				column="PUSH_MSG" 				javaType="string" />
+		<id property="collectorClass" 		column="COLLECTOR_CLASS" 		javaType="string" />
+		<id property="pushDt" 				column="PUSH_DT" 				javaType="int" />
+	</resultMap>
+	
+	<select id="selectAllTokens" resultType="PushDevice" resultMap="PushDeviceResult">
+	<![CDATA[ 
+		SELECT
+			APPID
+			, TOKEN
+			, LOGIN_TY
+		FROM
+			PUSH_TOKEN
+	]]>
+	</select>
+	
+	<select id="selectAppId" resultType="PushDevice" resultMap="PushDeviceResult">
+	<![CDATA[ 
+		SELECT
+			APPID
+			, TOKEN
+			, LOGIN_TY
+		FROM
+			PUSH_TOKEN
+		WHERE
+			APPID = #{appId}
+	]]>
+	</select>
+	
+	<delete id="deleteToken" parameterType="map">
+		DELETE FROM
+			PUSH_TOKEN
+		WHERE
+			TOKEN = #{token}
+	</delete>
+	
+	<update id="updateToken" parameterType="map">
+		UPDATE
+			PUSH_TOKEN
+		SET
+			TOKEN = #{newToken}
+		WHERE
+			TOKEN = #{oldToken}
+	</update>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<select id="selectPushSchedulers" parameterType="map" resultType="PushScheduler" resultMap="PushSchedulerResult">
+	<![CDATA[ 
+		SELECT
+			PUSH_SCHEDULER_KEY
+			, PUSH_TITLE
+			, PUSH_MSG
+			, COLLECTOR_CLASS
+			, PUSH_DT
+		FROM
+			ADMIN_PUSH_SCHEDULER
+		WHERE
+			SCHEDULER_DT = 0
+			AND PUSH_DT >= #{startDt}
+			AND PUSH_DT <= #{endDt}
+	]]>
+	</select>
+	
+	<update id="updatePushSchedulerDt" parameterType="map">
+		UPDATE
+			ADMIN_PUSH_SCHEDULER
+		SET
+			SCHEDULER_DT = #{schedulerDt}
+		WHERE
+			PUSH_SCHEDULER_KEY = #{pushSchedulerKey}
+	</update>
+	
+	<update id="updatePushSchedulerAndroidResult" parameterType="map">
+		UPDATE
+			ADMIN_PUSH_SCHEDULER
+		SET
+			AND_SUCCESS = AND_SUCCESS + #{andSuccess}
+			, AND_FAIL = AND_FAIL + #{andFail}
+		WHERE
+			PUSH_SCHEDULER_KEY = #{pushSchedulerKey}
+	</update>
+	
+	<update id="updatePushSchedulerIosResult" parameterType="map">
+		UPDATE
+			ADMIN_PUSH_SCHEDULER
+		SET
+			IOS_SUCCESS = IOS_SUCCESS + #{iosSuccess}
+			, IOS_FAIL = IOS_FAIL + #{iosFail}
+		WHERE
+			PUSH_SCHEDULER_KEY = #{pushSchedulerKey}
+	</update>
+	
+	<update id="updatePushSchedulerCollectedUsers" parameterType="map">
+		UPDATE
+			ADMIN_PUSH_SCHEDULER
+		SET
+			COLLECTED_USERS = #{collectedUsers}
+		WHERE
+			PUSH_SCHEDULER_KEY = #{pushSchedulerKey}
+	</update>
+	
+	<update id="updatePushSchedulerAndroidStartDt" parameterType="map">
+		UPDATE
+			ADMIN_PUSH_SCHEDULER
+		SET
+			AND_START_DT = #{andStartDt}
+		WHERE
+			PUSH_SCHEDULER_KEY = #{pushSchedulerKey}
+	</update>
+	
+	<update id="updatePushSchedulerIosStartDt" parameterType="map">
+		UPDATE
+			ADMIN_PUSH_SCHEDULER
+		SET
+			IOS_START_DT = #{iosStartDt}
+		WHERE
+			PUSH_SCHEDULER_KEY = #{pushSchedulerKey}
+	</update>
+	
+	<update id="updatePushSchedulerAndroidEndDt" parameterType="map">
+		UPDATE
+			ADMIN_PUSH_SCHEDULER
+		SET
+			AND_END_DT = IF(#{andEndDt} > AND_END_DT, #{andEndDt}, AND_END_DT)
+		WHERE
+			PUSH_SCHEDULER_KEY = #{pushSchedulerKey}
+	</update>
+
+	<update id="updatePushSchedulerIosEndDt" parameterType="map">
+		UPDATE
+			ADMIN_PUSH_SCHEDULER
+		SET
+			IOS_END_DT = IF(#{iosEndDt} > IOS_END_DT, #{iosEndDt}, IOS_END_DT)
+		WHERE
+			PUSH_SCHEDULER_KEY = #{pushSchedulerKey}
+	</update>
+
+
+	
+</mapper>

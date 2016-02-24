@@ -1,0 +1,17 @@
+{
+"maintenance" : {
+	"start":"2013/08/01 00:00"
+	, "end":"2013/08/02 00:00"
+	, "type" : 0
+	, "text" : "write text if type=0, write url if type=1"
+}
+, "notices" : [
+   	{"start":"2013/08/01 00:00", "end":"2013/09/24 23:59", 
+		"type":0, "eidx":-1, 
+		"text":"This is text notice sample. text 텍스트 eng 한글 ... (2013/08/01 ~ 2013/09/25)", 
+		"link":"http://google.co.kr"}
+	, {"start":"2013/08/01 00:00", "end":"2013/09/24 23:59", 
+		"type":1, "eidx":100, 
+		"text":"http://www.nemopan.com/files/attach/images/2585/904/259/002/2.jpg", 
+		"link":"http://google.co.kr"}
+]}

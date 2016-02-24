@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nfl.kfb.mapper.shop.AnysdkpayMapper">
+
+	<resultMap id="AnysdkpayResult" type="Anysdkpay">
+		<id property="id" column="id" javaType="long" />
+		<id property="order_id" column="order_id" javaType="string" />
+		<id property="product_count" column="product_count" javaType="int" />
+		<id property="amount" column="amount" javaType="java.math.BigDecimal" />
+		<id property="pay_status" column="pay_status" javaType="int" />
+		<id property="pay_time" column="pay_time" javaType="java.util.Date" />
+		<id property="user_id" column="user_id" javaType="string" />
+		<id property="order_type" column="order_type" javaType="string" />
+		<id property="game_user_id" column="game_user_id" javaType="string" />
+		<id property="game_id" column="game_id" javaType="string" />
+		<id property="server_id" column="server_id" javaType="string" />
+		<id property="product_name" column="product_name" javaType="string" />
+		<id property="product_id" column="product_id" javaType="int" />
+		<id property="private_data" column="private_data" javaType="string" />
+		<id property="channel_number" column="channel_number" javaType="string" />
+		<id property="sign" column="sign" javaType="string" />
+		<id property="source" column="source" javaType="string" />
+		<id property="realPaytime" column="realPaytime" javaType="java.util.Date" />
+	</resultMap>
+
+
+
+	<select id="selectAnysdkpayByorderid" parameterType="map"
+		resultType="Anysdkpay" resultMap="AnysdkpayResult">
+		<![CDATA[
+		SELECT 
+		    id,
+		    order_id,
+		    product_count,
+		    amount,
+		    pay_status,
+		    pay_time,
+		    user_id,
+		    order_type,
+		    game_user_id,
+		    game_id,
+		    server_id,
+		    product_name,
+		    product_id,
+		    private_data,
+		    channel_number,
+		    sign,
+		    source,
+		    realPaytime
+		FROM
+		    anysdkpay
+		where
+		    order_id = #{order_id}
+		]]>
+	</select>
+
+	<insert id="insertAnysdkpay" parameterType="map" keyProperty="id"
+		useGeneratedKeys="true">
+		<![CDATA[
+			INSERT INTO anysdkpay
+			(
+			order_id,
+			product_count,
+			amount,
+			pay_status,
+			pay_time,
+			user_id,
+			order_type,
+			game_user_id,
+			game_id,
+			server_id,
+			product_name,
+			product_id,
+			private_data,
+			channel_number,
+			sign,
+			source,
+			realPaytime)
+			VALUES
+			(
+			#{order_id},
+			#{product_count},
+			#{amount},
+			#{pay_status},
+			#{pay_time},
+			#{user_id},
+			#{order_type},
+			#{game_user_id},
+			#{game_id},
+			#{server_id},
+			#{product_name},
+			#{product_id},
+			#{private_data},
+			#{channel_number},
+			#{sign},
+			#{source},
+			#{realPaytime}
+			)
+		]]>
+	</insert>
+
+
+	<!-- <select id="selectShopList" parameterType="map" resultType="Shop" resultMap="ShopResult"> 
+		SELECT ITEM_ID , NAME , CNT , PRICE_TYPE , PRICE , INSTANT , LVUP_PRICE , 
+		LVUP_BASE FROM SHOP WHERE SHOP_VER = #{shopVer} </select> <select id="selectShopCurrency" 
+		parameterType="map" resultType="ShopCurrency" resultMap="ShopCurrencyResult"> 
+		SELECT STORE , ITEM_ID , PROD_ID , CURRENCY , CURRENCY_TYPE , NAME FROM SHOP_CURRENCY 
+		WHERE STORE = #{store} AND PROD_ID = #{prodId} </select> <insert id="insertStoreReceipt" 
+		parameterType="map"> INSERT INTO STORE_RECEIPT ( APPID , RECEIPT , BUY_DT 
+		) VALUES ( #{appId} , #{receipt} , #{buyDt} ) </insert> -->
+
+</mapper>

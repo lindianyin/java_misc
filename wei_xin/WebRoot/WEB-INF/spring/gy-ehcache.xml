@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="http://ehcache.org/ehcache.xsd" updateCheck="false">   
+	<!-- 
+	<defaultCache
+		eternal="false" 
+		maxElementsInMemory="10000"
+		overflowToDisk="false" 
+		diskPersistent="false" 
+		timeToIdleSeconds="0"
+		timeToLiveSeconds="60" 
+		memoryStoreEvictionPolicy="LRU" />
+	
+	<cache name="gyp_appCache" 
+		eternal="false" 
+		maxElementsInMemory="10"
+		overflowToDisk="false" 
+		diskPersistent="false" 
+		timeToIdleSeconds="0"
+		timeToLiveSeconds="600"
+		memoryStoreEvictionPolicy="LRU" />
+	
+	
+	
+	<defaultCache
+		eternal="false" 
+		maxElementsInMemory="10"
+		overflowToDisk="false" 
+		diskPersistent="false" 
+		timeToIdleSeconds="0"
+		timeToLiveSeconds="60" 
+		memoryStoreEvictionPolicy="LRU" />
+
+	<cache name="weekResourceCache" 
+		eternal="false" 
+		maxElementsInMemory="10"
+		overflowToDisk="false" 
+		diskPersistent="false" 
+		timeToIdleSeconds="0"
+		timeToLiveSeconds="600"
+		memoryStoreEvictionPolicy="LRU" />
+
+	<cache name="eventCache" 
+		eternal="false" 
+		maxElementsInMemory="100"
+		overflowToDisk="false" 
+		diskPersistent="false" 
+		timeToIdleSeconds="0"
+		timeToLiveSeconds="60" 
+		memoryStoreEvictionPolicy="LRU" />
+	 -->
+	<!-- 
+	<cache name="thisWeekTotalRank" 
+		eternal="false" 
+		maxElementsInMemory="1000"
+		overflowToDisk="false" 
+		diskPersistent="false" 
+		timeToIdleSeconds="0"
+		timeToLiveSeconds="20" 
+		memoryStoreEvictionPolicy="LRU" />
+	-->
+	
+	<!-- 
+	<cache name="sessionKeyCache" 
+		eternal="false" 
+		maxElementsInMemory="10000"
+		overflowToDisk="false" 
+		diskPersistent="false" 
+		timeToIdleSeconds="300"
+		timeToLiveSeconds="0" 
+		memoryStoreEvictionPolicy="LRU" />
+	-->
+	<!-- 
+	<cache name="shopCache" 
+		eternal="false" 
+		maxElementsInMemory="200"
+		overflowToDisk="false" 
+		diskPersistent="false" 
+		timeToIdleSeconds="0"
+		timeToLiveSeconds="600" 
+		memoryStoreEvictionPolicy="LRU" />
+
+	<cache name="shopListCache" 
+		eternal="false" 
+		maxElementsInMemory="100"
+		overflowToDisk="false" 
+		diskPersistent="false" 
+		timeToIdleSeconds="0"
+		timeToLiveSeconds="600" 
+		memoryStoreEvictionPolicy="LRU" />
+
+	<cache name="appVerCache" 
+		eternal="false" 
+		maxElementsInMemory="30"
+		overflowToDisk="false" 
+		diskPersistent="false" 
+		timeToIdleSeconds="0"
+		timeToLiveSeconds="60"
+		memoryStoreEvictionPolicy="LRU" />
+
+	<cache name="gameProbCache" 
+		eternal="false" 
+		maxElementsInMemory="100"
+		overflowToDisk="false" 
+		diskPersistent="false" 
+		timeToIdleSeconds="0"
+		timeToLiveSeconds="60"
+		memoryStoreEvictionPolicy="LRU" />
+
+	<cache name="gameOptionCache" 
+		eternal="false" 
+		maxElementsInMemory="100"
+		overflowToDisk="false" 
+		diskPersistent="false" 
+		timeToIdleSeconds="0"
+		timeToLiveSeconds="60"
+		memoryStoreEvictionPolicy="LRU" />
+	-->
+
+<!-- 
+	<cache name="accountCache" 
+		eternal="false" 
+		maxElementsInMemory="100"
+		overflowToDisk="false" 
+		diskPersistent="false" 
+		timeToIdleSeconds="0"
+		timeToLiveSeconds="300" 
+		memoryStoreEvictionPolicy="LRU" />
+-->
+
+</ehcache>

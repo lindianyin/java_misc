@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nfl.kfb.mapper.rank.RankMapper">
+
+	<resultMap id="RankResult" type="Rank">
+		<id property="appId" 			column="APPID" 			javaType="string" />
+		<id property="gate" 			column="GATE" 			javaType="int" />
+		<id property="point" 			column="POINT" 			javaType="long" />
+	</resultMap>
+	<resultMap id="GrankResult" type="Grank">
+		<id property="id" 			  	column="id" 			javaType="int" />
+		<id property="appId" 			column="APPID" 			javaType="string" />
+		<id property="week" 			column="week" 			javaType="int" />
+		<id property="gate" 			column="GATE" 			javaType="int" />
+		<id property="point" 			column="POINT" 			javaType="long" />
+		<id property="reward_dt" 		column="REWARD_DT" 		javaType="int" />
+	</resultMap>
+	
+	
+	<resultMap id="GateRankResult" type="GateRank">
+		<id property="appId" 			column="APPID" 			javaType="string"/>
+		<id property="gate" 			column="GATE" 			javaType="int" />
+		<id property="point" 			column="POINT" 			javaType="int" />
+		<id property="rwDt" 			column="RW_DT" 			javaType="int" />
+		<id property="star" 			column="STAR" 			javaType="int" />
+	</resultMap>
+	
+	<select id="sumGateRankPoint" parameterType="map" resultType="long">
+		SELECT
+			COALESCE(SUM(POINT), 0)
+		FROM
+			gate_rank
+		WHERE
+			WEEK = #{week}
+			AND APPID = #{appId}
+			AND GATE != #{gate}
+	</select>
+	
+	<insert id="insertGateRank" parameterType="map">
+	<![CDATA[ 
+		INSERT INTO
+			gate_rank (
+				APPID
+				, GATE
+				, WEEK
+				, POINT
+				, RW_DT
+				, STAR
+		)
+		VALUES (
+			#{appId}
+			, #{gate}
+			, #{week}
+			, #{point}
+			, #{rwDt}
+			, #{star}
+		)
+	]]>
+	</insert>
+	
+	<update id="updateGateRank" parameterType="map">
+		UPDATE
+			gate_rank
+		SET
+			POINT = #{point}
+			, RW_DT = #{rwDt}
+			, STAR = #{star}
+		WHERE
+			APPID = #{appId}
+			AND WEEK = #{week}
+			AND GATE = #{gate}
+	</update>
+	
+	<insert id="insertOrUpdateRankPoint" parameterType="map">
+	<![CDATA[ 
+		INSERT INTO
+			rank (
+				APPID
+				, GATE
+				, WEEK
+				, POINT
+				, REWARD_DT
+		)
+		VALUES (
+			#{appId}
+			, #{gate}
+			, #{week}
+			, #{point}
+			, #{rewardDt}
+		)
+		ON DUPLICATE KEY UPDATE
+			POINT = IF(#{point} > POINT, #{point}, POINT)
+			, GATE = IF(#{gate} > GATE, #{gate}, GATE)
+	]]>
+	</insert>
+	
+	
+	<select id="selectUnsordedRank" parameterType="map" resultType="Rank" resultMap="RankResult">
+		SELECT
+			APPID
+			, POINT
+			, GATE
+		FROM
+			rank
+		WHERE
+			WEEK = #{week}
+			AND APPID IN
+				<foreach collection="appIds" item="item" index="index" separator="," open="(" close=")">
+	    			#{item}
+				</foreach>
+	</select>
+	
+	
+	<select id="selectUnsordedGateRank" parameterType="map" resultType="GateRank" resultMap="GateRankResult">
+			SELECT
+				APPID
+				,GATE
+				, POINT
+				, RW_DT
+			FROM
+				gate_rank
+			WHERE
+				WEEK = #{week} AND GATE = #{gate}
+				
+				AND APPID IN
+					<foreach collection="appIds" item="item" index="index" separator="," open="(" close=")">
+		    			#{item}
+					</foreach>
+	</select>
+	
+	
+	<select id="countGateAllClearFriends" parameterType="map" resultType="int">
+		SELECT
+			COUNT(APPID)
+		FROM
+			gate_rank
+		WHERE
+			WEEK = #{week}
+			AND GATE = #{lastGate}
+			AND APPID IN
+				<foreach collection="appIds" item="item" index="index" separator="," open="(" close=")">
+	    			#{item}
+				</foreach>
+			AND RW_DT > 0
+	</select>
+	
+	<select id="selectRankRewardDt" parameterType="map" resultType="java.lang.Integer" >
+		SELECT
+			REWARD_DT
+		FROM
+			rank
+		WHERE
+			WEEK = #{week}
+			AND APPID = #{appId}
+	</select>
+	
+	<update id="updateRankRewardDt" parameterType="map">
+		UPDATE
+			rank
+		SET
+			REWARD_DT = #{rewardDt}
+		WHERE
+			APPID = #{appId}
+			AND WEEK = #{week}
+	</update>
+	
+	<select id="selectGateRankList" parameterType="map" resultType="GateRank" resultMap="GateRankResult">
+		SELECT
+			GATE
+			, POINT
+			, RW_DT
+		FROM
+			gate_rank
+		WHERE
+			WEEK = #{week}
+			AND APPID = #{appId}
+	</select>
+	
+	<select id="selectGateRank" parameterType="map" resultType="GateRank" resultMap="GateRankResult">
+		SELECT
+			APPID
+			, GATE
+			, WEEK
+			, POINT
+			, RW_DT
+			, STAR
+		FROM
+			gate_rank
+		WHERE
+			WEEK = #{week}
+			AND APPID = #{appId}
+			AND GATE = #{gate}
+	</select>
+	
+	<delete id="removeGateRank" parameterType="map" >
+		DELETE FROM
+			gate_rank
+		WHERE
+			WEEK = #{week}
+			AND APPID = #{appId}
+	</delete>
+	
+	<delete id="removeRankByAppId" parameterType="map" >
+		DELETE FROM
+			rank
+		WHERE
+			APPID = #{appId}
+	</delete>
+	
+	<select id="rownumOfGolobalRank" parameterType="map" resultType="int">
+		SELECT rownum  from 
+		(SELECT @rownum:=@rownum+1 rownum, t.*
+			FROM (SELECT @rownum:=0) r, rank t ORDER BY POINT DESC,GATE desc) as b where APPID=#{appid};
+	</select>
+	
+	
+	
+	<select id="selectGolobalRankList" parameterType="map" resultType="Grank" resultMap="GrankResult">
+		<![CDATA[
+			SELECT * FROM
+				(SELECT @rownum:=@rownum+1 id, t.*
+				FROM (SELECT @rownum:=0) r, rank t ORDER BY POINT DESC,GATE desc) as a where id > (#{idx}-5) and id < (#{idx} + 4)
+		]]>
+
+	</select>
+	
+	
+	<select id="selectGolobalRankListLessThan10" parameterType="map" resultType="Grank" resultMap="GrankResult">
+		<![CDATA[
+			SELECT * FROM
+				(SELECT @rownum:=@rownum+1 id, t.*
+				FROM (SELECT @rownum:=0) r, rank t ORDER BY POINT DESC,GATE desc) as a where id < 10
+		]]>
+
+	</select>
+	
+	
+	
+	
+	
+	<select id="selectAGateRank" parameterType="map" resultType="GateRank" resultMap="GateRankResult">
+	
+	<![CDATA[
+			SELECT
+				APPID
+				, GATE
+				, POINT
+				, RW_DT
+				, STAR
+			FROM
+				gate_rank
+			WHERE
+				WEEK = #{week} AND GATE = #{gate} AND APPID=#{appId}
+	
+	]]>
+	</select>
+	
+	<select id="selectGateRankListGate" parameterType="map" resultType="GateRank" resultMap="GateRankResult">
+	
+	<![CDATA[
+			SELECT * FROM
+			(SELECT * from gate_rank where GATE = #{gate} and WEEK = #{week} AND POINT > 0 ORDER BY POINT ASC) as a where a.POINT > #{point} LIMIT 0,#{limit}
+	
+	]]>
+	</select>
+	
+
+</mapper>

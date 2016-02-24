@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nfl.kfb.mapper.gamble.GambleMapper">
+
+	<resultMap id="GambleProbResult" type="GambleProb">
+		<id property="gambleProbId" 	column="GAMBLE_PROB_ID" 	javaType="int" />
+		<id property="itemId" 			column="ITEM_ID" 			javaType="int" />
+		<id property="itemCnt" 			column="ITEM_CNT" 			javaType="int" />
+		<id property="probability" 		column="PROBABILITY" 		javaType="int" />
+		<id property="missProb" 		column="MISS_PROB" 			javaType="int" />
+	</resultMap>
+	
+	<select id="selectGambleProb" resultType="GambleProb" resultMap="GambleProbResult">
+	<![CDATA[ 
+		SELECT
+			GAMBLE_PROB_ID
+			, ITEM_ID
+			, ITEM_CNT
+			, PROBABILITY
+			, MISS_PROB
+		FROM
+			gamble_prob
+	]]>
+	</select>
+	
+	<select id="selectGamblePoint" parameterType="map" resultType="int">
+		SELECT
+			COALESCE(SUM(GAMBLE_POINT), 0)		<!-- avoid rows does'nt exist -->
+		FROM
+			gamble_point
+		WHERE
+			APPID = #{appId}
+	</select>
+	
+	<insert id="increaseGamblePoint" parameterType="map">
+	<![CDATA[ 
+		INSERT INTO
+			gamble_point (
+				APPID
+				, GAMBLE_POINT
+		)
+		VALUES (
+			#{appId}
+			, #{gamblePoint}
+		)
+		ON DUPLICATE KEY UPDATE
+			GAMBLE_POINT = GAMBLE_POINT + #{gamblePoint}
+	]]>
+	</insert>
+
+</mapper>

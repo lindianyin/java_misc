@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="kfb push" default="publish" basedir=".">
+	<tstamp prefix="build-info">
+		<format property="current-date" pattern="d-MMMM-yyyy" />
+		<format property="current-time" pattern="HH:mm:ss a z" />
+		<format property="warfile.postfix" pattern="yyyyMMdd-HHmmss" />
+	</tstamp>
+	
+	<property name="src.dir" value="src" />
+	<property name="lib.dir" value="lib" />
+	<property name="config.dir" value="config" />
+	<property name="build.dir" value="dist" />
+
+	<property name="host.dir" value="/home/administrator/kfbpush" />
+
+	<property name="login.name" value="administrator" />
+	<property name="user.password" value="rlatjdtn" />
+	<property name="host.domain" value="192.168.0.8" />
+	<property name="host.port" value="22" />
+	
+	<fileset id="lib.fileset" dir="${lib.dir}">
+		<include name="**/*.jar" />
+	</fileset>
+	
+	<path id="compile.classpath">
+		<fileset refid="lib.fileset">
+		</fileset>
+	</path>
+
+	<target name="clean">
+		<delete dir="${build.dir}" />
+	</target>
+
+	<target name="init" depends="clean">
+		<mkdir dir="${build.dir}" />
+	</target>
+
+	<target name="build" depends="init">
+		<mkdir dir="${build.dir}/bin"/>
+		<javac destdir="${build.dir}/bin" srcdir="${src.dir}" includeantruntime="false" debug="true" debuglevel="lines,var,source">
+			<classpath refid="compile.classpath" />
+		</javac>
+		<copy todir="${build.dir}/bin">
+			<fileset dir="${src.dir}" excludes="**/*.java" />
+		</copy>
+		<mkdir dir="${build.dir}/lib"/>
+		<copy todir="${build.dir}/lib">
+			<fileset refid="lib.fileset" />
+		</copy>
+		<mkdir dir="${build.dir}/${config.dir}"/>
+		<copy todir="${build.dir}/${config.dir}">
+			<fileset dir="${config.dir}" />
+		</copy>
+	</target>
+
+	<!-- publish -->
+	<target name="publish" depends="build">
+		<echo level="warning" message="publish to ${login.name}@${host.domain}:${host.dir}  webcontents" />
+		<scp todir="${login.name}@${host.domain}:${host.dir}" password="${user.password}" port="${host.port}" trust="true" verbose="true">
+			<fileset dir="${build.dir}" />
+		</scp>
+	</target>
+
+</project>

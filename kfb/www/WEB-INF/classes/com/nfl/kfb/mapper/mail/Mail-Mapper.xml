@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nfl.kfb.mapper.mail.MailMapper">
+
+	<resultMap id="MailResult" type="Mail">
+		<id property="mailKey" 			column="MAIL_KEY" 		javaType="int" />
+		<id property="owner" 			column="OWNER" 			javaType="string" />
+		<id property="sender" 			column="SENDER" 		javaType="string" />
+		<id property="item" 			column="ITEM" 			javaType="int" />
+		<id property="cnt" 				column="CNT" 			javaType="int" />
+		<id property="delDt" 			column="DEL_DT" 		javaType="int" />
+		<id property="msg" 				column="MSG" 			javaType="string" />
+		<id property="title" 			column="TITLE" 			javaType="string" />
+	</resultMap>
+	
+	<resultMap id="PunchResult" type="Punch">
+		<id property="fAppId" 			column="F_APPID" 		javaType="string" />
+		<id property="regDt" 			column="REG_DT" 		javaType="int" />
+	</resultMap>
+	
+	<select id="selectMail" parameterType="map" resultType="Mail" resultMap="MailResult">
+		SELECT
+			MAIL_KEY
+			, OWNER
+			, SENDER
+			, ITEM
+			, CNT
+			, DEL_DT
+			, MSG
+			, TITLE
+		FROM
+			mail
+		WHERE
+			OWNER = #{owner}
+			AND MAIL_KEY = #{mailKey}
+	</select>
+	
+	<update id="removeMail" parameterType="map">
+		DELETE FROM
+			mail
+		WHERE
+			MAIL_KEY = #{mailKey}
+	</update>
+	
+	<select id="selectMailBox" parameterType="map" resultType="Mail" resultMap="MailResult">
+	<![CDATA[ 
+		SELECT
+			MAIL_KEY
+			, OWNER
+			, SENDER
+			, ITEM
+			, CNT
+			, DEL_DT
+			, MSG
+			,TITLE
+		FROM
+			mail
+		WHERE
+			OWNER = #{owner}
+			AND DEL_DT > #{delDt}
+		LIMIT 0, #{limit}
+	]]>
+	</select>
+	
+	<select id="countMailBox" parameterType="map" resultType="int">
+		SELECT
+			COUNT(MAIL_KEY)
+		FROM
+			mail
+		WHERE
+			OWNER = #{owner}
+			AND DEL_DT > #{delDt}
+	</select>
+	
+	<insert id="insertMail" parameterType="Mail">
+		<selectKey keyProperty="mailKey" resultType="int" order="AFTER">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+		INSERT INTO
+			mail (
+				OWNER
+				, SENDER
+				, ITEM
+				, CNT
+				, DEL_DT
+				, MSG
+		)
+		VALUES (
+			#{owner}
+			, #{sender}
+			, #{item}
+			, #{cnt}
+			, #{delDt}
+			, #{msg}
+		)
+	</insert>
+	
+	<delete id="deleteOldMail" parameterType="map">
+	<![CDATA[ 
+		DELETE FROM
+			mail
+		WHERE
+			DEL_DT < #{delDt}
+	]]>
+	</delete>
+	
+	<delete id="deleteAllMail" parameterType="map">
+		DELETE FROM
+			mail
+		WHERE
+			OWNER = #{appId}
+	</delete>
+	
+	
+	
+	
+	
+	
+	<select id="selectPunchRegDt" parameterType="map" resultType="java.lang.Integer">
+		SELECT
+			REG_DT
+		FROM
+			punch
+		WHERE
+			APPID = #{appId}
+			AND F_APPID = #{fAppId}
+	</select>
+	
+	<select id="selectPunchList" parameterType="map" resultType="Punch" resultMap="PunchResult">
+	<![CDATA[ 
+		SELECT
+			F_APPID
+			, REG_DT
+		FROM
+			punch
+		WHERE
+			APPID = #{appId}
+			AND REG_DT > #{regDtLimit}
+	]]>
+	</select>
+	
+	<insert id="replacePunch" parameterType="map">
+		REPLACE INTO
+			punch (
+				APPID
+				, F_APPID
+				, REG_DT
+		)
+		VALUES (
+			#{appId}
+			, #{fAppId}
+			, #{regDt}
+		)
+	</insert>
+	
+	<delete id="deleteAllPunch" parameterType="map">
+		DELETE FROM
+			punch
+		WHERE
+			APPID = #{appId}
+	</delete>
+	
+	<delete id="deleteOldPunch" parameterType="map">
+	<![CDATA[ 
+		DELETE FROM
+			punch
+		WHERE
+			REG_DT < #{regDt}
+	]]>
+	</delete>
+	
+	
+	
+	
+</mapper>

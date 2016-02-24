@@ -1,0 +1,6 @@
+2013-10-11 11:26:05,424 [DEBUG] c.n.k.p.sender.KfbPushNotification - todo
+2013-10-11 11:26:06,320 [DEBUG] c.n.k.p.sender.KfbPushNotification - [PUSH] DEVICE[ANDROID] MSG[push testest...!!], APPID[88311665281022209] TOKEN[APA91bFr30DtqpiDUEYLcVjFl206BTTIW-uJDmCs1jnuaUvI9EGp8SkAQk0ATlpLmcursRrl-iRbbjVdhz8iOa23oVOvbcsJOsz7sCU60c-DZO5Mi3omX38Bk8YCzRjHoV83votCLYrTsiOXGdEL5Q08rQ6_s2L9LdYl5c4hKKe_krFUxlhpO0s]
+2013-10-11 11:26:06,320 [DEBUG] c.n.k.p.sender.KfbPushNotification - [SENT] DEVICE[ANDROID] RESULT[[ messageId=0:1381458371847978%41726fddf9fd7ecd ]]
+2013-10-11 11:30:35,634 [DEBUG] c.n.k.p.sender.KfbPushNotification - todo
+2013-10-11 11:30:35,647 [DEBUG] c.n.k.p.sender.KfbPushNotification - [PUSH] DEVICE[ANDROID] MSG[push testest...!!], APPID[88311665281022209] TOKEN[APA91bFr30DtqpiDUEYLcVjFl206BTTIW-uJDmCs1jnuaUvI9EGp8SkAQk0ATlpLmcursRrl-iRbbjVdhz8iOa23oVOvbcsJOsz7sCU60c-DZO5Mi3omX38Bk8YCzRjHoV83votCLYrTsiOXGdEL5Q08rQ6_s2L9LdYl5c4hKKe_krFUxlhpO0s]
+2013-10-11 11:30:36,344 [DEBUG] c.n.k.p.sender.KfbPushNotification - [SENT] DEVICE[ANDROID] SUCCESS[[ messageId=0:1381458641906514%41726fddf9fd7ecd ]]

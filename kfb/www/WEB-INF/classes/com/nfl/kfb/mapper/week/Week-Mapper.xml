@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nfl.kfb.mapper.week.WeekMapper">
+
+	<resultMap id="WeekMissionResult" type="WeekMission">
+		<id property="week" 			column="WEEK" 		javaType="int" />
+		<id property="gate" 			column="GATE" 		javaType="int" />
+		<id property="mission1Id" 		column="MS1_ID" 	javaType="int" />
+		<id property="mission1Value" 	column="MS1_VL"		javaType="int" />
+		<id property="mission2Id" 		column="MS2_ID" 	javaType="int" />
+		<id property="mission2Value" 	column="MS2_VL" 	javaType="int" />
+		<id property="reward1ItemId" 	column="RW1_ID" 	javaType="int" />
+		<id property="reward1ItemCnt" 	column="RW1_CNT"	javaType="int" />
+		<id property="reward2ItemId" 	column="RW2_ID" 	javaType="int" />
+		<id property="reward2ItemCnt" 	column="RW2_CNT" 	javaType="int" />
+		<id property="punch" 			column="PUNCH" 		javaType="int" />
+	</resultMap>
+	
+	<resultMap id="WeekAchResult" type="WeekAchieve">
+		<id property="week" 			column="WEEK" 		javaType="int" />
+		<id property="aidx" 			column="AIDX" 		javaType="int" />
+		<id property="achTId" 			column="ACH_TID" 	javaType="int" />
+		<id property="achId" 			column="ACH_ID" 	javaType="int" />
+		<id property="achValue" 		column="ACH_VL" 	javaType="int" />
+		<id property="rewardItemId" 	column="RW_ID"	 	javaType="int" />
+		<id property="rewardItemCnt" 	column="RW_CNT" 	javaType="int" />
+	</resultMap>
+	
+	<select id="selectWeekMission" parameterType="int" resultType="WeekMission" resultMap="WeekMissionResult">
+		SELECT
+			WEEK
+			, GATE
+			, MS1_ID
+			, MS1_VL
+			, MS2_ID
+			, MS2_VL
+			, RW1_ID
+			, RW1_CNT
+			, RW2_ID
+			, RW2_CNT
+			, PUNCH
+		FROM
+			week_ms
+		WHERE
+			WEEK = #{week}
+	</select>
+	
+	<select id="selectWeekAchieve" parameterType="int" resultType="WeekAchieve" resultMap="WeekAchResult">
+		SELECT
+			WEEK
+			, AIDX
+			, ACH_TID
+			, ACH_ID
+			, ACH_VL
+			, RW_ID
+			, RW_CNT
+		FROM
+			week_ach
+		WHERE
+			WEEK = #{week}
+	</select>
+	
+</mapper>

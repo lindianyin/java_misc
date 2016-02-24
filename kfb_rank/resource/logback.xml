@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configuration>
+
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<!-- 
+			<Pattern>%d{HH:mm:ss.SSS} %-5level %logger{36} - %msg%n</Pattern>
+			-->
+			<pattern>%date [%-5level] %logger{36} - %msg%n</pattern>
+		</layout>
+		
+		<!-- encoders are assigned by default the type ch.qos.logback.classic.encoder.PatternLayoutEncoder -->
+		<!-- 
+		<encoder>
+			<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+		</encoder>
+		-->
+	</appender>
+	
+	<!--Basic file appender
+	<appender name="FILE"
+		class="ch.qos.logback.core.FileAppender">
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<pattern>%-4relative [%thread] %-5level %class - %msg%n</pattern>
+		</layout>
+		<File>sample-log.txt</File>
+	</appender>
+	-->
+
+    <!--Daily rolling file appender -->
+	<appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<File>d:/log/kfb.log</File>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<FileNamePattern>d:/log/kfb.%d{yyyy-MM-dd}.log</FileNamePattern>
+		</rollingPolicy>
+
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<!-- 
+			<Pattern>%d{HH:mm:ss.SSS} %-5level %logger{36} - %msg%n</Pattern>
+			-->
+			<pattern>%date [%-5level] %logger{36} - %msg%n</pattern>
+		</layout>
+	</appender>
+	
+	<logger name="com.gy" level="INFO" additivity="false">
+		<appender-ref ref="STDOUT" />
+	</logger>
+	
+	<logger name="com.gy.mapper" level="INFO" additivity="false">
+		<appender-ref ref="STDOUT" />
+	</logger>
+	
+	<root>
+		<level value="INFO" />
+		<appender-ref ref="STDOUT" />
+		<!-- 
+		<appender-ref ref="FILE" />
+		-->
+	</root>
+
+</configuration>

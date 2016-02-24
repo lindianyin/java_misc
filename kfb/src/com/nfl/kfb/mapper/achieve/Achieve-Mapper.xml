@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nfl.kfb.mapper.achieve.AchieveMapper">
+
+	<select id="selectAchieve" parameterType="map" resultType="int">
+		SELECT
+			ACH_IDX
+		FROM
+			achieve
+		WHERE
+			APPID = #{appId}
+			AND WEEK = #{week}
+	</select>
+	
+	<insert id="insertAchieve" parameterType="map">
+		INSERT INTO
+			achieve (
+				APPID
+				, WEEK
+				, ACH_IDX
+				, ACH_DT
+		)
+		VALUES (
+			#{appId}
+			, #{week}
+			, #{achIdx}
+			, #{achDt}
+		)
+	</insert>
+	
+	<delete id="deleteAllAchieve" parameterType="map">
+		DELETE FROM
+			achieve
+		WHERE
+			APPID = #{appId}
+			AND WEEK = #{week}
+	</delete>
+	
+</mapper>

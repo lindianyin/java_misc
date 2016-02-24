@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nfl.kfb.mapper.shop.ShopMapper">
+
+	<resultMap id="ShopResult" type="Shop">
+		<id property="itemId" 			column="ITEM_ID" 		javaType="int" />
+		<id property="name" 			column="NAME" 			javaType="string" />
+		<id property="cnt" 				column="CNT" 			javaType="int" />
+		<id property="priceType" 		column="PRICE_TYPE" 	javaType="int" />
+		<id property="price" 			column="PRICE" 			javaType="float" />
+		<id property="instant" 			column="INSTANT" 		javaType="int" />
+		<id property="lvupPrice" 		column="LVUP_PRICE" 	javaType="int" />
+		<id property="lvupBase" 		column="LVUP_BASE" 		javaType="int" />
+	</resultMap>
+	
+	<resultMap id="ShopCurrencyResult" type="ShopCurrency">
+		<id property="store" 			column="STORE" 			javaType="string" />
+		<id property="itemId" 			column="ITEM_ID" 		javaType="int" />
+		<id property="prodId" 			column="PROD_ID" 		javaType="string" />
+		<id property="currency" 		column="CURRENCY" 		javaType="float" />
+		<id property="currencyType" 	column="CURRENCY_TYPE" 	javaType="string" />
+		<id property="name" 			column="NAME" 			javaType="string" />
+	</resultMap>
+	
+	<select id="selectShop" parameterType="map" resultType="Shop" resultMap="ShopResult">
+		SELECT
+			ITEM_ID
+			, NAME
+			, CNT
+			, PRICE_TYPE
+			, PRICE
+			, INSTANT
+			, LVUP_PRICE
+			, LVUP_BASE
+		FROM
+			shop
+		WHERE
+			SHOP_VER = #{shopVer}
+			AND ITEM_ID = #{itemId}
+	</select>
+	
+	<select id="selectShopList" parameterType="map" resultType="Shop" resultMap="ShopResult">
+		SELECT
+			ITEM_ID
+			, NAME
+			, CNT
+			, PRICE_TYPE
+			, PRICE
+			, INSTANT
+			, LVUP_PRICE
+			, LVUP_BASE
+		FROM
+			shop
+		WHERE
+			SHOP_VER = #{shopVer}
+	</select>
+	
+	<select id="selectShopCurrency" parameterType="map" resultType="ShopCurrency" resultMap="ShopCurrencyResult">
+		SELECT
+			STORE
+			, ITEM_ID
+			, PROD_ID
+			, CURRENCY
+			, CURRENCY_TYPE
+			, NAME
+		FROM
+			shop_currency
+		WHERE
+			STORE = #{store}
+			AND PROD_ID = #{prodId}
+	</select>
+	
+		<select id="selectShopCurrencyByStore" parameterType="map" resultType="ShopCurrency" resultMap="ShopCurrencyResult">
+		SELECT
+			STORE
+			, ITEM_ID
+			, PROD_ID
+			, CURRENCY
+			, CURRENCY_TYPE
+			, NAME
+		FROM
+			shop_currency
+		WHERE
+			STORE = #{store}
+	</select>
+	
+	
+	
+	<insert id="insertStoreReceipt" parameterType="map">
+		INSERT INTO
+			store_receipt (
+				APPID
+				, RECEIPT
+				, BUY_DT
+		)
+		VALUES (
+			#{appId}
+			, #{receipt}
+			, #{buyDt}
+		)
+	</insert>
+	
+	
+</mapper>

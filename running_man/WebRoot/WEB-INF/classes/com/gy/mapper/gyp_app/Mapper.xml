@@ -1,0 +1,364 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gy.mapper.gyp_app.Gyp_appMapper">
+	<!-- 
+	<select id="countOfGyp_app" resultType="java.lang.Integer">
+		SELECT COUNT(*) as count from gyp_app
+		
+	</select>
+	
+	<select id="selectAllGyp_app" resultType="com.gy.mapper.gyp_app.Gyp_app">
+		SELECT *  from gyp_app
+	</select>
+	
+	<insert id="insertGyp_app" parameterType="com.gy.mapper.gyp_app.Gyp_app" useGeneratedKeys="true"  keyProperty="id" >
+		INSERT INTO gyp_app (name) VALUE (#{name})
+	</insert>
+	
+	<insert id="insertGyp_appGroup">
+		INSERT INTO gyp_app (name) VALUES
+		<foreach collection="list" index="index" item="item" separator=","> 
+            (#{item}) 
+        </foreach> 
+	</insert>
+
+	<insert id="insertGyp_appGroup1">
+		INSERT INTO gyp_app (name) VALUES
+		<foreach collection="list" index="index" item="item" separator=","> 
+            (#{item.name}) 
+        </foreach> 
+	</insert>
+	<insert id="insertGyp_app1" parameterType="map">
+		INSERT INTO gyp_app (name) VALUES (#{name}),(#{name1})
+		
+	</insert>
+	
+	<select id="selectSomeApp" resultType="com.gy.mapper.gyp_app.Gyp_app">
+		SELECT *  from gyp_app
+		where id > 70
+		<if test="name.length() > 4">
+			and name = #{name}
+		</if>
+	
+	</select>
+	
+	 -->
+	
+	<!-- 
+	<resultMap id="AccountResult" type="Account">
+		<id property="appId" 			column="APPID" 			javaType="string" />
+		<id property="gold" 			column="GOLD" 			javaType="int" />
+		<id property="ball" 			column="BALL" 			javaType="int" />
+		<id property="sessionKey" 		column="SESSION" 		javaType="int" />
+		<id property="playGate" 		column="PLAY_GATE" 		javaType="int" />
+		<id property="playWeek" 		column="PLAY_WEEK" 		javaType="int" />
+		<id property="playKey" 			column="PLAY_KEY" 		javaType="int" />
+		<id property="attCnt" 			column="ATT_CNT" 		javaType="int" />
+		<id property="attDt" 			column="ATT_DT" 		javaType="int" />
+		<id property="punch" 			column="PUNCH" 			javaType="int" />
+		<id property="punchDt" 			column="PUNCH_DT" 		javaType="int" />
+		<id property="chId" 			column="CH_ID" 			javaType="int" />
+		<id property="chLv" 			column="CH_LV" 			javaType="int" />
+		<id property="petId" 			column="PET_ID" 		javaType="int" />
+		<id property="tuto" 			column="TUTO" 			javaType="int" />
+		<id property="rev" 				column="REV" 			javaType="int" />
+		<id property="push" 			column="PUSH" 			javaType="int" />
+		<id property="creDt" 			column="CRE_DT" 		javaType="int" />
+		<id property="loginDt" 			column="LOGIN_DT" 		javaType="int" />
+		<id property="loginType" 		column="LOGIN_TY" 		javaType="string" />
+		<id property="loginVer" 		column="LOGIN_VR" 		javaType="string" />
+		<id property="ccode" 			column="CCODE" 			javaType="string" />
+	</resultMap>
+	
+	<resultMap id="FriendAccountResult" type="FriendAccount">
+		<id property="appId" 			column="APPID" 			javaType="string" />
+		<id property="push" 			column="PUSH" 			javaType="int" />
+		<id property="chId" 			column="CH_ID" 			javaType="int" />
+		<id property="chLv" 			column="CH_LV" 			javaType="int" />
+		<id property="petId" 			column="PET_ID" 		javaType="int" />
+	</resultMap>
+	
+	
+	<select id="selectAccount" parameterType="map" resultType="Account" resultMap="AccountResult">
+		SELECT
+			APPID
+			, GOLD
+			, BALL
+			, SESSION
+			, PLAY_GATE
+			, PLAY_WEEK
+			, PLAY_KEY
+			, ATT_CNT
+			, ATT_DT
+			, PUNCH
+			, PUNCH_DT
+			, CH_ID
+			, CH_LV
+			, PET_ID
+			, TUTO
+			, REV
+			, PUSH
+			, CRE_DT
+			, LOGIN_DT
+			, LOGIN_TY
+			, LOGIN_VR
+			, CCODE
+		FROM
+			ACCOUNT
+		WHERE
+			APPID = #{appId}
+	</select>
+	
+	<insert id="insertAccount" parameterType="Account">
+		INSERT INTO
+			ACCOUNT (
+				APPID
+				, GOLD
+				, BALL
+				, SESSION
+				, PLAY_GATE
+				, PLAY_WEEK
+				, PLAY_KEY
+				, ATT_CNT
+				, ATT_DT
+				, PUNCH
+				, PUNCH_DT
+				, CH_ID
+				, CH_LV
+				, PET_ID
+				, TUTO
+				, REV
+				, PUSH
+				, CRE_DT
+				, LOGIN_DT
+				, LOGIN_TY
+				, LOGIN_VR
+				, CCODE
+			)
+		VALUES (
+			#{appId}
+			, #{gold}
+			, #{ball}
+			, #{sessionKey}
+			, #{playGate}
+			, #{playWeek}
+			, #{playKey}
+			, #{attCnt}
+			, #{attDt}
+			, #{punch}
+			, #{punchDt}
+			, #{chId}
+			, #{chLv}
+			, #{petId}
+			, #{tuto}
+			, #{rev}
+			, #{push}
+			, #{creDt}
+			, #{loginDt}
+			, #{loginType}
+			, #{loginVer}
+			, #{ccode}
+		)
+	</insert>
+
+	<update id="updateFinishPlay" parameterType="Account">
+		UPDATE
+			ACCOUNT
+		SET
+			GOLD = #{gold}
+			, BALL = #{ball}
+			, PUNCH = #{punch}
+			, PUNCH_DT = #{punchDt}
+			, PLAY_KEY = #{playKey}
+		WHERE
+			APPID = #{appId}
+	</update>
+
+	<update id="updateStartPlay" parameterType="Account">
+		UPDATE
+			ACCOUNT
+		SET
+			PLAY_GATE = #{playGate}
+			, PLAY_WEEK = #{playWeek}
+			, PLAY_KEY = #{playKey}
+			, PUNCH = #{punch}
+			, PUNCH_DT = #{punchDt}
+			, CH_ID = #{chId}
+			, CH_LV = #{chLv}
+			, PET_ID = #{petId}
+		WHERE
+			APPID = #{appId}
+	</update>
+
+	<update id="updateLogin" parameterType="Account">
+		UPDATE
+			ACCOUNT
+		SET
+			SESSION = #{sessionKey}
+			, GOLD = #{gold}
+			, BALL = #{ball}
+			, PUNCH = #{punch}
+			, PUNCH_DT = #{punchDt}
+			, LOGIN_DT = #{loginDt}
+			, LOGIN_TY = #{loginType}
+			, LOGIN_VR = #{loginVer}
+			, CCODE = #{ccode}
+		WHERE
+			APPID = #{appId}
+	</update>
+
+	<update id="updateReviewRw" parameterType="Account">
+		UPDATE
+			ACCOUNT
+		SET
+			GOLD = #{gold}
+			, BALL = #{ball}
+			, PUNCH = #{punch}
+			, PUNCH_DT = #{punchDt}
+			, REV = #{rev}
+		WHERE
+			APPID = #{appId}
+	</update>
+
+	<update id="updateTutorialRw" parameterType="Account">
+		UPDATE
+			ACCOUNT
+		SET
+			GOLD = #{gold}
+			, BALL = #{ball}
+			, PUNCH = #{punch}
+			, PUNCH_DT = #{punchDt}
+			, TUTO = #{tuto}
+		WHERE
+			APPID = #{appId}
+	</update>
+
+	<update id="updateAttendanceRw" parameterType="Account">
+		UPDATE
+			ACCOUNT
+		SET
+			GOLD = #{gold}
+			, BALL = #{ball}
+			, PUNCH = #{punch}
+			, PUNCH_DT = #{punchDt}
+			, ATT_CNT = #{attCnt}
+			, ATT_DT = #{attDt}
+		WHERE
+			APPID = #{appId}
+	</update>
+
+	<update id="updateAccountItem" parameterType="Account">
+		UPDATE
+			ACCOUNT
+		SET
+			GOLD = #{gold}
+			, BALL = #{ball}
+			, PUNCH = #{punch}
+			, PUNCH_DT = #{punchDt}
+		WHERE
+			APPID = #{appId}
+	</update>
+
+	<update id="updatePushOption" parameterType="map">
+		UPDATE
+			ACCOUNT
+		SET
+			PUSH = #{push}
+		WHERE
+			APPID = #{appId}
+	</update>
+	
+	<delete id="deleteAccount" parameterType="map">
+		DELETE FROM
+			ACCOUNT
+		WHERE
+			APPID = #{appId}
+	</delete>
+	
+	<select id="selectFriendAccount" parameterType="string" resultType="FriendAccount" resultMap="FriendAccountResult">
+		SELECT
+			APPID
+			, PUSH
+			, CH_ID
+			, CH_LV
+			, PET_ID
+		FROM
+			ACCOUNT
+		WHERE
+			APPID IN 
+		  	<foreach collection="appIds" index="index" item="item" open="(" separator="," close=")">
+		  		#{item}
+		  	</foreach>
+	</select>
+	
+	
+	
+	
+	
+	<insert id="insertOrUpdatePushToken" parameterType="map">
+	<![CDATA[ 
+		INSERT INTO
+			PUSH_TOKEN (
+				APPID
+				, TOKEN
+				, LOGIN_DT
+				, LOGIN_TY
+				, LOGIN_VR
+				, CCODE
+		)
+		VALUES (
+			#{appId}
+			, #{token}
+			, #{loginDt}
+			, #{loginTy}
+			, #{loginVr}
+			, #{ccode}
+		)
+		ON DUPLICATE KEY UPDATE
+			TOKEN = #{token}
+			, LOGIN_DT = #{loginDt}
+			, LOGIN_TY = #{loginTy}
+			, LOGIN_VR = #{loginVr}
+			, CCODE = #{ccode}
+	]]>
+	</insert>
+	
+	<delete id="deletePushToken">
+		DELETE FROM
+			PUSH_TOKEN
+		WHERE
+			APPID = #{appId}
+	</delete>
+	
+	<update id="updatePushTokenLogin" parameterType="map">
+		UPDATE
+			PUSH_TOKEN
+		SET
+			LOGIN_DT = #{loginDt}
+			, LOGIN_TY = #{loginTy}
+			, LOGIN_VR = #{loginVr}
+			, CCODE = #{ccode}
+		WHERE
+			APPID = #{appId}
+	</update>
+
+
+
+
+	<select id="countBlockAccount" parameterType="map" resultType="int">
+	<![CDATA[ 
+		SELECT
+			COUNT(APPID)
+		FROM
+			ACCOUNT_BLOCK
+		WHERE
+			APPID = #{appId}
+			AND END_DT > #{epoch}
+	]]>
+	</select>
+
+	 -->
+
+	
+</mapper>

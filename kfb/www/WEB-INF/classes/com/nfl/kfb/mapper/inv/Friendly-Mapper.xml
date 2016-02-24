@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nfl.kfb.mapper.inv.FriendlyMapper">
+
+	<resultMap id="FriendlyResult" type="Friendly">
+		<id property="fri_self" 			column="fri_self" 			javaType="string" />
+		<id property="fri_op" 				column="fri_op" 			javaType="string" />
+		<id property="status" 			column="status" 				javaType="int" />
+	</resultMap>
+	
+	
+	<select id="selectFriendlyList" parameterType="map" resultType="String">
+		SELECT 
+		IF(fri_self=#{fri_self},fri_op,fri_self) as apps
+		from (SELECT * FROM friendly where (fri_self = #{fri_self} or fri_op = #{fri_self}) and status = #{status}) as b;
+	</select>
+	
+	<select id="selectFriendlyListReq" parameterType="map" resultType="String">
+		SELECT 
+		IF(fri_self=#{fri_self},fri_op,fri_self) as apps
+		from (SELECT * FROM friendly where (fri_op = #{fri_self}) and status = #{status}) as b;
+	</select>
+	
+	
+	
+	
+	<select id="selectFriendly" parameterType="map" resultType="Friendly" resultMap="FriendlyResult">
+		SELECT
+			fri_self
+			, fri_op
+			, status
+		FROM
+			friendly
+		WHERE
+			((fri_self=#{fri_self} and  fri_op=#{fri_op}) or (fri_self=#{fri_op} and  fri_op=#{fri_self}))
+	</select>
+	
+	<insert id="insertFriendly" parameterType="Friendly">
+		INSERT INTO
+			friendly (
+				fri_self
+				, fri_op
+				, status
+			)
+		VALUES (
+			#{fri_self}
+			, #{fri_op}
+			, #{status}
+			)
+	</insert>
+	
+	<update id="updateFriendly" parameterType="map">
+		UPDATE
+			friendly
+		SET
+			status = #{status}
+		WHERE
+			fri_self = #{fri_op} and fri_op = #{fri_self}
+			
+	</update>
+	
+	<delete id="deleteFriendly" parameterType="map">
+		DELETE FROM
+			friendly
+		WHERE
+			((fri_self=#{fri_self} and fri_op=#{fri_op}) or (fri_self=#{fri_op} and fri_op=#{fri_self})) and status = #{status}
+	</delete>
+</mapper>

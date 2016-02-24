@@ -1,0 +1,25 @@
+{
+"maintenance" : {
+	"start":"2013/08/01 00:00"
+	, "end":"2013/08/02 00:00"
+	, "type" : 0
+	, "text" : "doing maintenance..."
+	, "link" : "http://www.nflgamz.com"
+}
+, "notices" : [
+	{"start":"2013/08/01 00:00", "end":"2013/08/30 23:59", 
+		"type":0, "eidx":-1, 
+		"text":"This is text notice sample. text 韰嶌姢韸�eng 頃滉竴 ... (2013/08/01 ~ 2013/09/25)", 
+		"link":"http://google.co.kr"}
+	, {"start":"2013/08/01 00:00", "end":"2015/09/24 23:59", 
+		"type":1, "eidx":100, 
+		"text":"http://www.nemopan.com/files/attach/images/2585/904/259/002/2.jpg", 
+		"link":"http://google.co.kr"}
+	
+	
+	, {"start":"2014/01/28 13:00", "end":"2015/02/01 23:59", "type":1, "eidx":-1, "text":"http://image.zcool.com.cn/17/12/m_1248417599079.jpg", "link":"http://smart.nflgamz.com/kungfubirds/kungEventDetail.do?contentsId=987"}
+	
+	
+	
+	
+]}

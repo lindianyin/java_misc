@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nfl.kfb.mapper.inven.InvenMapper">
+
+	<resultMap id="InvenResult" type="Inven">
+		<id property="appId" 			column="APPID" 		javaType="string" />
+		<id property="chId" 			column="CH_ID" 		javaType="int" />
+		<id property="itemId" 			column="ITEM_ID" 	javaType="int" />
+		<id property="itemLv" 			column="ITEM_LV"	javaType="int" />
+		<id property="itemCnt" 			column="ITEM_CNT" 	javaType="int" />
+	</resultMap>
+	
+	<select id="selectAllItem" parameterType="map" resultType="Inven" resultMap="InvenResult">
+		SELECT
+			APPID
+			, CH_ID
+			, ITEM_ID
+			, ITEM_LV
+			, ITEM_CNT
+		FROM
+			inven
+		WHERE
+			APPID = #{appId}
+	</select>
+	
+	
+	<select id="selectMaxLvPet" parameterType="map" resultType="Inven" resultMap="InvenResult">
+		SELECT * from inven where APPID = #{appId} and CH_ID = ITEM_ID ORDER BY ITEM_LV desc LIMIT 1
+	</select>
+	
+	
+	<select id="selectItem" parameterType="map" resultType="Inven" resultMap="InvenResult">
+		SELECT
+			APPID
+			, CH_ID
+			, ITEM_ID
+			, ITEM_LV
+			, ITEM_CNT
+		FROM
+			inven
+		WHERE
+			APPID = #{appId}
+			AND CH_ID = #{chId}
+			AND ITEM_ID = #{itemId}
+	</select>
+	
+	<select id="countItem" parameterType="map" resultType="int">
+		SELECT
+			COUNT(APPID)
+		FROM
+			inven
+		WHERE
+			APPID = #{appId}
+			AND CH_ID = #{chId}
+			AND ITEM_ID = #{itemId}
+	</select>
+	
+	<insert id="insertItem" parameterType="Inven" >
+		INSERT INTO
+			inven (
+				APPID
+				, CH_ID
+				, ITEM_ID
+				, ITEM_LV
+				, ITEM_CNT
+		)
+		VALUES (
+			#{appId}
+			, #{chId}
+			, #{itemId}
+			, #{itemLv}
+			, #{itemCnt}
+		)
+	</insert>
+	
+	<update id="updateItem" parameterType="Inven" >
+		UPDATE
+			inven
+		SET
+			ITEM_LV = #{itemLv}
+			, ITEM_CNT = #{itemCnt}
+		WHERE
+			APPID = #{appId}
+			AND CH_ID = #{chId}
+			AND ITEM_ID = #{itemId}
+	</update>
+	
+	<delete id="deleteItem" parameterType="Inven">
+		DELETE FROM
+			inven
+		WHERE
+			APPID = #{appId}
+			AND CH_ID = #{chId}
+			AND ITEM_ID = #{itemId}
+	</delete>
+	
+
+	
+	<insert id="insertIgnoreItem" parameterType="map" >
+		INSERT IGNORE INTO
+			inven (
+				APPID
+				, CH_ID
+				, ITEM_ID
+				, ITEM_LV
+				, ITEM_CNT
+		)
+		VALUES (
+			#{appId}
+			, #{chId}
+			, #{itemId}
+			, #{itemLv}
+			, #{itemCnt}
+		)
+	</insert>
+	
+	<delete id="deleteInven" parameterType="map">
+		DELETE FROM
+			inven
+		WHERE
+			APPID = #{appId}
+	</delete>
+		
+</mapper>

@@ -1,0 +1,87 @@
+2013-10-11 11:52:04,328 [DEBUG] c.n.k.p.sender.KfbPushNotification - todo
+2013-10-11 14:43:54,313 [ERROR] com.nfl.kfb.push.dao.PushSqlSession - fail to build SqlSessionFactory
+org.apache.ibatis.exceptions.PersistenceException: 
+### Error building SqlSession.
+### The error may exist in SQL Mapper Configuration
+### Cause: org.apache.ibatis.builder.BuilderException: Error parsing SQL Mapper Configuration. Cause: org.apache.ibatis.builder.BuilderException: Error registering typeAlias for 'PushDevice'. Cause: java.lang.ClassNotFoundException: Cannot find class: com.nfl.kfb.statistics.collector.PushDevice
+	at org.apache.ibatis.exceptions.ExceptionFactory.wrapException(ExceptionFactory.java:23) ~[mybatis-3.1.1.jar:3.1.1]
+	at org.apache.ibatis.session.SqlSessionFactoryBuilder.build(SqlSessionFactoryBuilder.java:79) ~[mybatis-3.1.1.jar:3.1.1]
+	at org.apache.ibatis.session.SqlSessionFactoryBuilder.build(SqlSessionFactoryBuilder.java:63) ~[mybatis-3.1.1.jar:3.1.1]
+	at com.nfl.kfb.push.dao.PushSqlSession.openRealSession(PushSqlSession.java:69) [bin/:na]
+	at com.nfl.kfb.push.dao.PushSqlSession.openSession(PushSqlSession.java:37) [bin/:na]
+	at com.nfl.kfb.push.collector.impl.CollectAllDevices.collectPushDevices(CollectAllDevices.java:33) [bin/:na]
+	at com.nfl.kfb.push.sender.KfbPushSender.main(KfbPushSender.java:47) [bin/:na]
+Caused by: org.apache.ibatis.builder.BuilderException: Error parsing SQL Mapper Configuration. Cause: org.apache.ibatis.builder.BuilderException: Error registering typeAlias for 'PushDevice'. Cause: java.lang.ClassNotFoundException: Cannot find class: com.nfl.kfb.statistics.collector.PushDevice
+	at org.apache.ibatis.builder.xml.XMLConfigBuilder.parseConfiguration(XMLConfigBuilder.java:105) ~[mybatis-3.1.1.jar:3.1.1]
+	at org.apache.ibatis.builder.xml.XMLConfigBuilder.parse(XMLConfigBuilder.java:88) ~[mybatis-3.1.1.jar:3.1.1]
+	at org.apache.ibatis.session.SqlSessionFactoryBuilder.build(SqlSessionFactoryBuilder.java:77) ~[mybatis-3.1.1.jar:3.1.1]
+	... 5 common frames omitted
+Caused by: org.apache.ibatis.builder.BuilderException: Error registering typeAlias for 'PushDevice'. Cause: java.lang.ClassNotFoundException: Cannot find class: com.nfl.kfb.statistics.collector.PushDevice
+	at org.apache.ibatis.builder.xml.XMLConfigBuilder.typeAliasesElement(XMLConfigBuilder.java:126) ~[mybatis-3.1.1.jar:3.1.1]
+	at org.apache.ibatis.builder.xml.XMLConfigBuilder.parseConfiguration(XMLConfigBuilder.java:95) ~[mybatis-3.1.1.jar:3.1.1]
+	... 7 common frames omitted
+Caused by: java.lang.ClassNotFoundException: Cannot find class: com.nfl.kfb.statistics.collector.PushDevice
+	at org.apache.ibatis.io.ClassLoaderWrapper.classForName(ClassLoaderWrapper.java:188) ~[mybatis-3.1.1.jar:3.1.1]
+	at org.apache.ibatis.io.ClassLoaderWrapper.classForName(ClassLoaderWrapper.java:87) ~[mybatis-3.1.1.jar:3.1.1]
+	at org.apache.ibatis.io.Resources.classForName(Resources.java:250) ~[mybatis-3.1.1.jar:3.1.1]
+	at org.apache.ibatis.builder.xml.XMLConfigBuilder.typeAliasesElement(XMLConfigBuilder.java:119) ~[mybatis-3.1.1.jar:3.1.1]
+	... 8 common frames omitted
+2013-10-11 14:43:54,317 [ERROR] c.nfl.kfb.push.sender.KfbPushSender - com.nfl.kfb.push.collector.impl.CollectAllDevices@666c5482
+java.lang.NullPointerException: null
+	at com.nfl.kfb.push.collector.impl.CollectAllDevices.collectPushDevices(CollectAllDevices.java:43) ~[bin/:na]
+	at com.nfl.kfb.push.sender.KfbPushSender.main(KfbPushSender.java:47) [bin/:na]
+2013-10-11 14:45:05,883 [DEBUG] c.n.k.p.mapper.PushMapper.selectAll - ooo Using Connection [com.mysql.jdbc.JDBC4Connection@690bc995]
+2013-10-11 14:45:05,887 [DEBUG] c.n.k.p.mapper.PushMapper.selectAll - ==>  Preparing: SELECT APPID , TOKEN , LOGIN_TY FROM PUSH_TOKEN 
+2013-10-11 14:45:05,940 [DEBUG] c.n.k.p.mapper.PushMapper.selectAll - ==> Parameters: 
+2013-10-11 14:46:55,036 [DEBUG] c.n.k.p.mapper.PushMapper.selectAll - ooo Using Connection [com.mysql.jdbc.JDBC4Connection@7023d08b]
+2013-10-11 14:46:55,040 [DEBUG] c.n.k.p.mapper.PushMapper.selectAll - ==>  Preparing: SELECT APPID , TOKEN , LOGIN_TY FROM PUSH_TOKEN 
+2013-10-11 14:46:55,098 [DEBUG] c.n.k.p.mapper.PushMapper.selectAll - ==> Parameters: 
+2013-10-11 14:47:50,604 [INFO ] c.nfl.kfb.push.sender.KfbPushSender - PUSH_UNIQUE_KEY[11111] DEVICE[AND] MSG[msgmsg] SIZE[748]
+2013-10-11 14:49:47,210 [DEBUG] c.n.k.p.mapper.PushMapper.selectAll - ooo Using Connection [com.mysql.jdbc.JDBC4Connection@3f508f31]
+2013-10-11 14:49:47,214 [DEBUG] c.n.k.p.mapper.PushMapper.selectAll - ==>  Preparing: SELECT APPID , TOKEN , LOGIN_TY FROM PUSH_TOKEN 
+2013-10-11 14:49:47,276 [DEBUG] c.n.k.p.mapper.PushMapper.selectAll - ==> Parameters: 
+2013-10-11 14:52:49,424 [DEBUG] c.n.k.p.mapper.PushMapper.selectAll - ooo Using Connection [com.mysql.jdbc.JDBC4Connection@41e8fa70]
+2013-10-11 14:52:49,429 [DEBUG] c.n.k.p.mapper.PushMapper.selectAll - ==>  Preparing: SELECT APPID , TOKEN , LOGIN_TY FROM PUSH_TOKEN WHERE APPID in ('88311665281022209') 
+2013-10-11 14:52:49,477 [DEBUG] c.n.k.p.mapper.PushMapper.selectAll - ==> Parameters: 
+2013-10-11 14:53:02,401 [INFO ] c.nfl.kfb.push.sender.KfbPushSender - PUSH_UNIQUE_KEY[11111] DEVICE[AND] MSG[msgmsg dsffsfs 메시지!!!] SIZE[1]
+2013-10-11 14:53:19,462 [INFO ] c.nfl.kfb.push.sender.KfbPushSender - PUSH_UNIQUE_KEY[11111] DEVICE[IOS] MSG[msgmsg dsffsfs 메시지!!!] NOT_IMPLEMENTED_YET
+2013-10-11 14:53:39,314 [INFO ] c.nfl.kfb.push.sender.KfbPushSender - PUSH_UNIQUE_KEY[11111] DEVICE[AND] RESULT[SUCCESS] TOKEN[APA91bFr30DtqpiDUEYLcVjFl206BTTIW-uJDmCs1jnuaUvI9EGp8SkAQk0ATlpLmcursRrl-iRbbjVdhz8iOa23oVOvbcsJOsz7sCU60c-DZO5Mi3omX38Bk8YCzRjHoV83votCLYrTsiOXGdEL5Q08rQ6_s2L9LdYl5c4hKKe_krFUxlhpO0s]
+2013-10-11 15:43:40,756 [DEBUG] c.n.k.p.mapper.PushMapper.selectAll - ooo Using Connection [com.mysql.jdbc.JDBC4Connection@45e67e6a]
+2013-10-11 15:43:40,760 [DEBUG] c.n.k.p.mapper.PushMapper.selectAll - ==>  Preparing: SELECT APPID , TOKEN , LOGIN_TY FROM PUSH_TOKEN WHERE APPID in ('88311665281022209') 
+2013-10-11 15:43:40,817 [DEBUG] c.n.k.p.mapper.PushMapper.selectAll - ==> Parameters: 
+2013-10-11 15:43:41,279 [INFO ] c.nfl.kfb.push.sender.KfbPushSender - PUSH_UNIQUE_KEY[11111] DEVICE[AND] MSG[msgmsg dsffsfs 메시지!!!] SIZE[1]
+2013-10-11 15:43:41,281 [INFO ] c.nfl.kfb.push.sender.KfbPushSender - PUSH_UNIQUE_KEY[11111] DEVICE[IOS] MSG[msgmsg dsffsfs 메시지!!!] NOT_IMPLEMENTED_YET
+2013-10-11 15:43:41,967 [INFO ] c.nfl.kfb.push.sender.KfbPushSender - PUSH_UNIQUE_KEY[11111] DEVICE[AND] RESULT[SUCCESS] TOKEN[APA91bFr30DtqpiDUEYLcVjFl206BTTIW-uJDmCs1jnuaUvI9EGp8SkAQk0ATlpLmcursRrl-iRbbjVdhz8iOa23oVOvbcsJOsz7sCU60c-DZO5Mi3omX38Bk8YCzRjHoV83votCLYrTsiOXGdEL5Q08rQ6_s2L9LdYl5c4hKKe_krFUxlhpO0s]
+2013-10-11 15:45:20,914 [DEBUG] c.n.k.p.mapper.PushMapper.selectAll - ooo Using Connection [com.mysql.jdbc.JDBC4Connection@5c6ed322]
+2013-10-11 15:45:20,918 [DEBUG] c.n.k.p.mapper.PushMapper.selectAll - ==>  Preparing: SELECT APPID , TOKEN , LOGIN_TY FROM PUSH_TOKEN WHERE APPID in ('88311665281022209') 
+2013-10-11 15:45:20,977 [DEBUG] c.n.k.p.mapper.PushMapper.selectAll - ==> Parameters: 
+2013-10-11 15:45:21,447 [INFO ] c.nfl.kfb.push.sender.KfbPushSender - PUSH_UNIQUE_KEY[11111] DEVICE[AND] MSG[msgmsg dsffsfs 메시지!!!] SIZE[1]
+2013-10-11 15:45:21,450 [INFO ] c.nfl.kfb.push.sender.KfbPushSender - PUSH_UNIQUE_KEY[11111] DEVICE[IOS] MSG[msgmsg dsffsfs 메시지!!!] NOT_IMPLEMENTED_YET
+2013-10-11 15:45:22,113 [INFO ] c.nfl.kfb.push.sender.KfbPushSender - PUSH_UNIQUE_KEY[11111] DEVICE[AND] RESULT[SUCCESS] TOKEN[APA91bFr30DtqpiDUEYLcVjFl206BTTIW-uJDmCs1jnuaUvI9EGp8SkAQk0ATlpLmcursRrl-iRbbjVdhz8iOa23oVOvbcsJOsz7sCU60c-DZO5Mi3omX38Bk8YCzRjHoV83votCLYrTsiOXGdEL5Q08rQ6_s2L9LdYl5c4hKKe_krFUxlhpO0s]
+2013-10-11 15:45:22,114 [DEBUG] c.nfl.kfb.push.sender.KfbPushSender - ended gcm push sender
+2013-10-11 15:47:15,618 [DEBUG] c.n.k.p.mapper.PushMapper.selectAll - ooo Using Connection [com.mysql.jdbc.JDBC4Connection@4abf053f]
+2013-10-11 15:47:15,621 [DEBUG] c.n.k.p.mapper.PushMapper.selectAll - ==>  Preparing: SELECT APPID , TOKEN , LOGIN_TY FROM PUSH_TOKEN WHERE APPID in ('88311665281022209') 
+2013-10-11 15:47:15,689 [DEBUG] c.n.k.p.mapper.PushMapper.selectAll - ==> Parameters: 
+2013-10-11 15:47:16,153 [INFO ] c.nfl.kfb.push.sender.KfbPushSender - PUSH_UNIQUE_KEY[11111] DEVICE[AND] MSG[msgmsg dsffsfs 메시지!!!] SIZE[1]
+2013-10-11 15:47:16,155 [DEBUG] c.nfl.kfb.push.sender.KfbPushSender - ended call execute thread
+2013-10-11 15:47:16,155 [INFO ] c.nfl.kfb.push.sender.KfbPushSender - PUSH_UNIQUE_KEY[11111] DEVICE[IOS] MSG[msgmsg dsffsfs 메시지!!!] NOT_IMPLEMENTED_YET
+2013-10-11 15:47:16,155 [DEBUG] c.nfl.kfb.push.sender.KfbPushSender - ended KfbPushSender
+2013-10-11 15:47:16,924 [INFO ] c.nfl.kfb.push.sender.KfbPushSender - PUSH_UNIQUE_KEY[11111] DEVICE[AND] RESULT[SUCCESS] TOKEN[APA91bFr30DtqpiDUEYLcVjFl206BTTIW-uJDmCs1jnuaUvI9EGp8SkAQk0ATlpLmcursRrl-iRbbjVdhz8iOa23oVOvbcsJOsz7sCU60c-DZO5Mi3omX38Bk8YCzRjHoV83votCLYrTsiOXGdEL5Q08rQ6_s2L9LdYl5c4hKKe_krFUxlhpO0s]
+2013-10-11 15:47:16,924 [DEBUG] c.nfl.kfb.push.sender.KfbPushSender - ended gcm push sender
+2013-10-11 15:55:14,162 [DEBUG] c.n.k.p.mapper.PushMapper.selectAll - ooo Using Connection [com.mysql.jdbc.JDBC4Connection@4abf053f]
+2013-10-11 15:55:14,165 [DEBUG] c.n.k.p.mapper.PushMapper.selectAll - ==>  Preparing: SELECT APPID , TOKEN , LOGIN_TY FROM PUSH_TOKEN WHERE APPID in ('88311665281022209') 
+2013-10-11 15:55:14,219 [DEBUG] c.n.k.p.mapper.PushMapper.selectAll - ==> Parameters: 
+2013-10-11 15:55:14,697 [INFO ] c.nfl.kfb.push.sender.KfbPushSender - PUSH_UNIQUE_KEY[11111] DEVICE[AND] MSG[msgmsg dsffsfs 메시지!!!] SIZE[1]
+2013-10-11 15:55:15,475 [INFO ] c.nfl.kfb.push.sender.KfbPushSender - PUSH_UNIQUE_KEY[11111] DEVICE[AND] RESULT[SUCCESS] TOKEN[APA91bFr30DtqpiDUEYLcVjFl206BTTIW-uJDmCs1jnuaUvI9EGp8SkAQk0ATlpLmcursRrl-iRbbjVdhz8iOa23oVOvbcsJOsz7sCU60c-DZO5Mi3omX38Bk8YCzRjHoV83votCLYrTsiOXGdEL5Q08rQ6_s2L9LdYl5c4hKKe_krFUxlhpO0s]
+2013-10-11 15:55:44,687 [DEBUG] c.n.k.p.mapper.PushMapper.selectAll - ooo Using Connection [com.mysql.jdbc.JDBC4Connection@45e67e6a]
+2013-10-11 15:55:44,691 [DEBUG] c.n.k.p.mapper.PushMapper.selectAll - ==>  Preparing: SELECT APPID , TOKEN , LOGIN_TY FROM PUSH_TOKEN WHERE APPID in ('88311665281022209') 
+2013-10-11 15:55:44,752 [DEBUG] c.n.k.p.mapper.PushMapper.selectAll - ==> Parameters: 
+2013-10-11 15:55:45,233 [INFO ] c.nfl.kfb.push.sender.KfbPushSender - PUSH_UNIQUE_KEY[11111] DEVICE[AND] MSG[msgmsg dsffsfs 메시지!!!] SIZE[1]
+2013-10-11 15:55:45,898 [INFO ] c.nfl.kfb.push.sender.KfbPushSender - PUSH_UNIQUE_KEY[11111] DEVICE[AND] RESULT[SUCCESS] TOKEN[APA91bFr30DtqpiDUEYLcVjFl206BTTIW-uJDmCs1jnuaUvI9EGp8SkAQk0ATlpLmcursRrl-iRbbjVdhz8iOa23oVOvbcsJOsz7sCU60c-DZO5Mi3omX38Bk8YCzRjHoV83votCLYrTsiOXGdEL5Q08rQ6_s2L9LdYl5c4hKKe_krFUxlhpO0s]
+2013-10-11 15:55:46,235 [INFO ] c.nfl.kfb.push.sender.KfbPushSender - PUSH_UNIQUE_KEY[11111] DEVICE[IOS] MSG[msgmsg dsffsfs 메시지!!!] NOT_IMPLEMENTED_YET
+2013-10-11 15:56:16,777 [DEBUG] c.n.k.p.mapper.PushMapper.selectAll - ooo Using Connection [com.mysql.jdbc.JDBC4Connection@5c6ed322]
+2013-10-11 15:56:16,780 [DEBUG] c.n.k.p.mapper.PushMapper.selectAll - ==>  Preparing: SELECT APPID , TOKEN , LOGIN_TY FROM PUSH_TOKEN WHERE APPID in ('88311665281022209') 
+2013-10-11 15:56:16,837 [DEBUG] c.n.k.p.mapper.PushMapper.selectAll - ==> Parameters: 
+2013-10-11 15:56:17,312 [INFO ] c.nfl.kfb.push.sender.KfbPushSender - PUSH_UNIQUE_KEY[11111] DEVICE[AND] MSG[msgmsg dsffsfs 메시지!!!] SIZE[1]
+2013-10-11 15:56:18,314 [INFO ] c.nfl.kfb.push.sender.KfbPushSender - PUSH_UNIQUE_KEY[11111] DEVICE[IOS] MSG[msgmsg dsffsfs 메시지!!!] NOT_IMPLEMENTED_YET
+2013-10-11 15:56:28,002 [INFO ] c.nfl.kfb.push.sender.KfbPushSender - PUSH_UNIQUE_KEY[11111] DEVICE[AND] RESULT[SUCCESS] TOKEN[APA91bFr30DtqpiDUEYLcVjFl206BTTIW-uJDmCs1jnuaUvI9EGp8SkAQk0ATlpLmcursRrl-iRbbjVdhz8iOa23oVOvbcsJOsz7sCU60c-DZO5Mi3omX38Bk8YCzRjHoV83votCLYrTsiOXGdEL5Q08rQ6_s2L9LdYl5c4hKKe_krFUxlhpO0s]

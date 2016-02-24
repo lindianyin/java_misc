@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nfl.kfb.mapper.inv.InvMapper">
+
+	<resultMap id="InvResult" type="Inv">
+		<id property="appId" 			column="APPID" 			javaType="string" />
+		<id property="cnt" 				column="CNT" 			javaType="int" />
+		<id property="rw0Dt" 			column="RW0_DT" 		javaType="int" />
+		<id property="rw1Dt" 			column="RW1_DT" 		javaType="int" />
+		<id property="rw2Dt" 			column="RW2_DT" 		javaType="int" />
+		<id property="rw3Dt" 			column="RW3_DT" 		javaType="int" />
+		<id property="rw4Dt" 			column="RW4_DT" 		javaType="int" />
+		<id property="rw5Dt" 			column="RW5_DT" 		javaType="int" />
+	</resultMap>
+	
+	<resultMap id="InvListResult" type="InvList">
+		<id property="fAppId" 			column="F_APPID" 		javaType="string" />
+		<id property="invDt" 			column="INV_DT" 		javaType="int" />
+	</resultMap>
+	
+	<select id="selectInv" parameterType="map" resultType="Inv" resultMap="InvResult">
+		SELECT
+			APPID
+			, CNT
+			, RW0_DT
+			, RW1_DT
+			, RW2_DT
+			, RW3_DT
+			, RW4_DT
+			, RW5_DT
+		FROM
+			inv
+		WHERE
+			APPID = #{appId}
+	</select>
+	
+	<update id="updateInv" parameterType="Inv">
+		UPDATE
+			inv
+		SET
+			CNT = #{cnt}
+			, RW0_DT = #{rw0Dt}
+			, RW1_DT = #{rw1Dt}
+			, RW2_DT = #{rw2Dt}
+			, RW3_DT = #{rw3Dt}
+			, RW4_DT = #{rw4Dt}
+			, RW5_DT = #{rw5Dt}
+		WHERE
+			APPID = #{appId}
+			
+	</update>
+	
+	<insert id="insertInv" parameterType="Inv">
+		INSERT INTO
+			inv (
+				APPID
+				, CNT
+				, RW0_DT
+				, RW1_DT
+				, RW2_DT
+				, RW3_DT
+				, RW4_DT
+				, RW5_DT
+			)
+		VALUES (
+			#{appId}
+			, #{cnt}
+			, #{rw0Dt}
+			, #{rw1Dt}
+			, #{rw2Dt}
+			, #{rw3Dt}
+			, #{rw4Dt}
+			, #{rw5Dt}
+		)
+	</insert>
+
+	<delete id="deleteInv" parameterType="map">
+		DELETE FROM
+			inv
+		WHERE
+			APPID = #{appId}
+	</delete>
+	
+	<select id="selectInvList" parameterType="map" resultType="InvList" resultMap="InvListResult">
+	<![CDATA[ 
+		SELECT
+			F_APPID
+			, INV_DT
+		FROM
+			inv_list
+		WHERE
+			APPID = #{appId}
+			AND INV_DT > #{invDtLimit}
+	]]>
+	</select>
+	
+	<insert id="insertOrUpdateInvList" parameterType="map" >
+		INSERT INTO
+			inv_list (
+				APPID
+				, F_APPID
+				, INV_DT
+				, INV_CNT
+		)
+		VALUES (
+			#{appId}
+			, #{fAppId}
+			, #{invDt}
+			, 1
+		)
+		ON DUPLICATE KEY UPDATE
+			INV_DT = #{invDt}
+			, INV_CNT = INV_CNT + 1
+	</insert>
+	
+</mapper>
